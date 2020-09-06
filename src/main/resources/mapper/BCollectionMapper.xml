@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.hpwyx.manager.mapper.BCollectionMapper" >
+  <resultMap id="BaseResultMap" type="xyz.hpwyx.manager.pojo.BCollection" >
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_user_id" property="cUserId" jdbcType="INTEGER" />
+    <result column="c_book_id" property="cBookId" jdbcType="INTEGER" />
+    <result column="c_date" property="cDate" jdbcType="DATE" />
+    <result column="c_mark" property="cMark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_user_id, c_book_id, c_date, c_mark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from b_collection
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_collection
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xyz.hpwyx.manager.pojo.BCollection" >
+    insert into b_collection (c_id, c_user_id, c_book_id,
+      c_date, c_mark)
+    values (#{cId,jdbcType=INTEGER}, #{cUserId,jdbcType=INTEGER}, #{cBookId,jdbcType=INTEGER}, 
+      #{cDate,jdbcType=DATE}, #{cMark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BCollection" >
+    insert into b_collection
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cUserId != null" >
+        c_user_id,
+      </if>
+      <if test="cBookId != null" >
+        c_book_id,
+      </if>
+      <if test="cDate != null" >
+        c_date,
+      </if>
+      <if test="cMark != null" >
+        c_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cUserId != null" >
+        #{cUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cBookId != null" >
+        #{cBookId,jdbcType=INTEGER},
+      </if>
+      <if test="cDate != null" >
+        #{cDate,jdbcType=DATE},
+      </if>
+      <if test="cMark != null" >
+        #{cMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.hpwyx.manager.pojo.BCollection" >
+    update b_collection
+    <set >
+      <if test="cUserId != null" >
+        c_user_id = #{cUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cBookId != null" >
+        c_book_id = #{cBookId,jdbcType=INTEGER},
+      </if>
+      <if test="cDate != null" >
+        c_date = #{cDate,jdbcType=DATE},
+      </if>
+      <if test="cMark != null" >
+        c_mark = #{cMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.hpwyx.manager.pojo.BCollection" >
+    update b_collection
+    set c_user_id = #{cUserId,jdbcType=INTEGER},
+      c_book_id = #{cBookId,jdbcType=INTEGER},
+      c_date = #{cDate,jdbcType=DATE},
+      c_mark = #{cMark,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>

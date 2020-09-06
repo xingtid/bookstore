@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>书籍类别管理</title>
+    <link rel="stylesheet" href="/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/node_modules/jqvmap/dist/jqvmap.min.css"/>
+    <link rel="stylesheet" href="/css/style2.css">
+    <link rel="shortcut icon" href="/images/favicon.png"/>
+</head>
+<body>
+<div class="container-scroller">
+    <div th:replace="head::adminHead"></div>
+    <div class="container-fluid page-body-wrapper">
+        <div th:replace="head::adminLeft"></div>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title" style="margin-right: 14%">分类管理
+                                    <button style="float: right" class="btn btn-gradient-info" data-toggle="modal"
+                                            data-target="#addSource">添加
+                                    </button>
+                                </div>
+
+                                <div>
+
+                                </div>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <!-- 表头  -->
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>名称</th>
+                                        <th>商品数</th>
+                                        <th>备注</th>
+                                        <th>路径</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- 循环 -->
+                                    <tr th:each="a: ${typeList}">
+                                        <td th:text="${a.tId}">1</td>
+                                        <td th:text="${a.tName}">推荐</td>
+                                        <td th:text="${a.tCount}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.tMark}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.tUrl}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td>
+                                            <button type="button" class="btn btn-gradient-primary btn-sm"
+                                                    data-toggle="modal" data-target="#changeSource"
+                                                    th:id="${a.tId}"
+                                                    th:data-name="${a.tName}"
+                                                    th:data-mark="${a.tMark}" onclick="updateType(this)">更改
+                                            </button>
+                                            <button type="button" class="btn btn-gradient-danger btn-sm"
+                                                    data-toggle="modal"
+                                                    data-target="#deleteSource" th:id="${a.tId}"
+                                                    onclick="deletea(this)">删除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="deleteSource" role="dialog"
+                     aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">确定要删除该？删除后不可恢复！</div>
+                            </div>
+                            <form action="/delType" method="post">
+                                <input type="hidden" id="dele" name="tId" value="">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-xs btn-white"
+                                            data-dismiss="modal">取 消
+                                    </button>
+                                    <button type="submit" class="btn btn-xs btn-danger">确定</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- update -->
+                <div class="modal fade" id="changeSource" role="dialog"
+                     aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="gridSystemModalLabel">修改信息</h4>
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" action="/updateType"
+                                          method="post">
+                                        <div class="form-group ">
+                                            <div class="col-xs-8 ">
+                                                <input type="hidden" class="form-control input-sm duiqi"
+                                                       name="tId" id="rsup">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">名称：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi"
+                                                       id="uu_name" name="tName">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">备注：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi"
+                                                       id="uu_mark" name="tMark">
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-xs btn-xs btn-white"
+                                                    data-dismiss="modal">取 消
+                                            </button>
+                                            <button type="submit" class="btn btn-xs btn-xs btn-green">保
+                                                存
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- add -->
+                <div class="modal fade" id="addSource" role="dialog"
+                     aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="gridSystemModalLabel">添加信息</h4>
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal" action="/addType"
+                                          method="post">
+                                        <div class="form-group ">
+                                            <div class="col-xs-8 ">
+                                                <input type="hidden" class="form-control input-sm duiqi"
+                                                       name="u_id" value="" id="rsup">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">名称：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi"
+                                                       id="uu_name" name="tName" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">备注：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi"
+                                                       id="uu_name" name="tMark" >
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-xs btn-xs btn-white"
+                                                    data-dismiss="modal">取 消
+                                            </button>
+                                            <button type="submit" class="btn btn-xs btn-xs btn-green">保
+                                                存
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/vendors/js/vendor.bundle.base.js"></script>
+<script src="/vendors/js/vendor.bundle.addons.js"></script>
+<script src="/js/off-canvas.js"></script>
+<script src="/js/misc.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

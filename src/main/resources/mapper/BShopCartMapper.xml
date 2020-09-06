@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.hpwyx.manager.mapper.BShopCartMapper" >
+  <resultMap id="BaseResultMap" type="xyz.hpwyx.manager.pojo.BShopCart" >
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="c_user_id" property="cUserId" jdbcType="INTEGER" />
+    <result column="c_count" property="cCount" jdbcType="INTEGER" />
+    <result column="c_book_id" property="cBookId" jdbcType="INTEGER" />
+    <result column="c_price" property="cPrice" jdbcType="DECIMAL" />
+    <result column="c_all" property="cAll" jdbcType="DECIMAL" />
+    <result column="c_mark" property="cMark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, c_user_id, c_count, c_book_id, c_price, c_all, c_mark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from b_shop_cart
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_shop_cart
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xyz.hpwyx.manager.pojo.BShopCart" >
+    insert into b_shop_cart (c_id, c_user_id, c_count,
+      c_book_id, c_price, c_all, 
+      c_mark)
+    values (#{cId,jdbcType=INTEGER}, #{cUserId,jdbcType=INTEGER}, #{cCount,jdbcType=INTEGER}, 
+      #{cBookId,jdbcType=INTEGER}, #{cPrice,jdbcType=DECIMAL}, #{cAll,jdbcType=DECIMAL}, 
+      #{cMark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BShopCart" >
+    insert into b_shop_cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="cUserId != null" >
+        c_user_id,
+      </if>
+      <if test="cCount != null" >
+        c_count,
+      </if>
+      <if test="cBookId != null" >
+        c_book_id,
+      </if>
+      <if test="cPrice != null" >
+        c_price,
+      </if>
+      <if test="cAll != null" >
+        c_all,
+      </if>
+      <if test="cMark != null" >
+        c_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="cUserId != null" >
+        #{cUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cCount != null" >
+        #{cCount,jdbcType=INTEGER},
+      </if>
+      <if test="cBookId != null" >
+        #{cBookId,jdbcType=INTEGER},
+      </if>
+      <if test="cPrice != null" >
+        #{cPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cAll != null" >
+        #{cAll,jdbcType=DECIMAL},
+      </if>
+      <if test="cMark != null" >
+        #{cMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.hpwyx.manager.pojo.BShopCart" >
+    update b_shop_cart
+    <set >
+      <if test="cUserId != null" >
+        c_user_id = #{cUserId,jdbcType=INTEGER},
+      </if>
+      <if test="cCount != null" >
+        c_count = #{cCount,jdbcType=INTEGER},
+      </if>
+      <if test="cBookId != null" >
+        c_book_id = #{cBookId,jdbcType=INTEGER},
+      </if>
+      <if test="cPrice != null" >
+        c_price = #{cPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="cAll != null" >
+        c_all = #{cAll,jdbcType=DECIMAL},
+      </if>
+      <if test="cMark != null" >
+        c_mark = #{cMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.hpwyx.manager.pojo.BShopCart" >
+    update b_shop_cart
+    set c_user_id = #{cUserId,jdbcType=INTEGER},
+      c_count = #{cCount,jdbcType=INTEGER},
+      c_book_id = #{cBookId,jdbcType=INTEGER},
+      c_price = #{cPrice,jdbcType=DECIMAL},
+      c_all = #{cAll,jdbcType=DECIMAL},
+      c_mark = #{cMark,jdbcType=VARCHAR}
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>

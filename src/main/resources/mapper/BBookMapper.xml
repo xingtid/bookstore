@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.hpwyx.manager.mapper.BBookMapper">
+    <resultMap id="BaseResultMap" type="xyz.hpwyx.manager.pojo.BBook">
+        <id column="b_id" property="bId" jdbcType="INTEGER"/>
+        <result column="b_price" property="bPrice" jdbcType="DECIMAL"/>
+        <result column="b_discount" property="bDiscount" jdbcType="INTEGER"/>
+        <result column="b_name" property="bName" jdbcType="VARCHAR"/>
+        <result column="b_press" property="bPress" jdbcType="VARCHAR"/>
+        <result column="b_type_id" property="bTypeId" jdbcType="INTEGER"/>
+        <result column="b_anthor" property="bAnthor" jdbcType="VARCHAR"/>
+        <result column="b_is_new" property="bIsNew" jdbcType="INTEGER"/>
+        <result column="b_be_sales" property="bBeSales" jdbcType="INTEGER"/>
+        <result column="b_is_sole" property="bIsSole" jdbcType="INTEGER"/>
+        <result column="b_introduce" property="bIntroduce" jdbcType="VARCHAR"/>
+        <result column="b_pic" property="bPic" jdbcType="VARCHAR"/>
+        <result column="b_mark" property="bMark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        b_id, b_price, b_discount, b_name, b_press, b_type_id, b_anthor, b_is_new, b_be_sales,
+    b_is_sole, b_introduce, b_pic, b_mark
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from b_book
+        where b_id = #{bId,jdbcType=INTEGER}
+    </select>
+    <select id="findList" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from b_book
+        <where>
+            <if test="bName != null">
+                instr(b_name,#{bName}) > 0 OR instr(b_anthor,#{bName}) > 0
+            </if>
+            <if test="bTypeId != null">
+                b_type_id = #{bTypeId}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from b_book
+        where b_id = #{bId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="xyz.hpwyx.manager.pojo.BBook">
+        insert into b_book (b_id, b_price, b_discount,
+                            b_name, b_press, b_type_id,
+                            b_anthor, b_is_new, b_be_sales,
+                            b_is_sole, b_introduce, b_pic,
+                            b_mark)
+        values (#{bId,jdbcType=INTEGER}, #{bPrice,jdbcType=DECIMAL}, #{bDiscount,jdbcType=INTEGER},
+                #{bName,jdbcType=VARCHAR}, #{bPress,jdbcType=VARCHAR}, #{bTypeId,jdbcType=INTEGER},
+                #{bAnthor,jdbcType=VARCHAR}, #{bIsNew,jdbcType=INTEGER}, #{bBeSales,jdbcType=INTEGER},
+                #{bIsSole,jdbcType=INTEGER}, #{bIntroduce,jdbcType=VARCHAR}, #{bPic,jdbcType=VARCHAR},
+                #{bMark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BBook">
+        insert into b_book
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bId != null">
+                b_id,
+            </if>
+            <if test="bPrice != null">
+                b_price,
+            </if>
+            <if test="bDiscount != null">
+                b_discount,
+            </if>
+            <if test="bName != null">
+                b_name,
+            </if>
+            <if test="bPress != null">
+                b_press,
+            </if>
+            <if test="bTypeId != null">
+                b_type_id,
+            </if>
+            <if test="bAnthor != null">
+                b_anthor,
+            </if>
+            <if test="bIsNew != null">
+                b_is_new,
+            </if>
+            <if test="bBeSales != null">
+                b_be_sales,
+            </if>
+            <if test="bIsSole != null">
+                b_is_sole,
+            </if>
+            <if test="bIntroduce != null">
+                b_introduce,
+            </if>
+            <if test="bPic != null">
+                b_pic,
+            </if>
+            <if test="bMark != null">
+                b_mark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bId != null">
+                #{bId,jdbcType=INTEGER},
+            </if>
+            <if test="bPrice != null">
+                #{bPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="bDiscount != null">
+                #{bDiscount,jdbcType=INTEGER},
+            </if>
+            <if test="bName != null">
+                #{bName,jdbcType=VARCHAR},
+            </if>
+            <if test="bPress != null">
+                #{bPress,jdbcType=VARCHAR},
+            </if>
+            <if test="bTypeId != null">
+                #{bTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="bAnthor != null">
+                #{bAnthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bIsNew != null">
+                #{bIsNew,jdbcType=INTEGER},
+            </if>
+            <if test="bBeSales != null">
+                #{bBeSales,jdbcType=INTEGER},
+            </if>
+            <if test="bIsSole != null">
+                #{bIsSole,jdbcType=INTEGER},
+            </if>
+            <if test="bIntroduce != null">
+                #{bIntroduce,jdbcType=VARCHAR},
+            </if>
+            <if test="bPic != null">
+                #{bPic,jdbcType=VARCHAR},
+            </if>
+            <if test="bMark != null">
+                #{bMark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="xyz.hpwyx.manager.pojo.BBook">
+        update b_book
+        <set>
+            <if test="bPrice != null">
+                b_price = #{bPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="bDiscount != null">
+                b_discount = #{bDiscount,jdbcType=INTEGER},
+            </if>
+            <if test="bName != null">
+                b_name = #{bName,jdbcType=VARCHAR},
+            </if>
+            <if test="bPress != null">
+                b_press = #{bPress,jdbcType=VARCHAR},
+            </if>
+            <if test="bTypeId != null">
+                b_type_id = #{bTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="bAnthor != null">
+                b_anthor = #{bAnthor,jdbcType=VARCHAR},
+            </if>
+            <if test="bIsNew != null">
+                b_is_new = #{bIsNew,jdbcType=INTEGER},
+            </if>
+            <if test="bBeSales != null">
+                b_be_sales = #{bBeSales,jdbcType=INTEGER},
+            </if>
+            <if test="bIsSole != null">
+                b_is_sole = #{bIsSole,jdbcType=INTEGER},
+            </if>
+            <if test="bIntroduce != null">
+                b_introduce = #{bIntroduce,jdbcType=VARCHAR},
+            </if>
+            <if test="bPic != null">
+                b_pic = #{bPic,jdbcType=VARCHAR},
+            </if>
+            <if test="bMark != null">
+                b_mark = #{bMark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where b_id = #{bId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="xyz.hpwyx.manager.pojo.BBook">
+        update b_book
+        set b_price     = #{bPrice,jdbcType=DECIMAL},
+            b_discount  = #{bDiscount,jdbcType=INTEGER},
+            b_name      = #{bName,jdbcType=VARCHAR},
+            b_press     = #{bPress,jdbcType=VARCHAR},
+            b_type_id   = #{bTypeId,jdbcType=INTEGER},
+            b_anthor    = #{bAnthor,jdbcType=VARCHAR},
+            b_is_new    = #{bIsNew,jdbcType=INTEGER},
+            b_be_sales  = #{bBeSales,jdbcType=INTEGER},
+            b_is_sole   = #{bIsSole,jdbcType=INTEGER},
+            b_introduce = #{bIntroduce,jdbcType=VARCHAR},
+            b_pic       = #{bPic,jdbcType=VARCHAR},
+            b_mark      = #{bMark,jdbcType=VARCHAR}
+        where b_id = #{bId,jdbcType=INTEGER}
+    </update>
+</mapper>

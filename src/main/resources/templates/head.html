@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<!-- head -->
+<header id="head" th:fragment="head" style="top: 0">
+    <section class="top-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="contact-number">
+                        <!--                    <i class="tf-ion-ios-telephone"></i>-->
+                        <!--                    <span>0129- 12323-123123</span>-->
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-4">
+                    <div class="logo text-center">
+                        <a href="index.html" >
+                            <span style="font-size: 48px" >沁香园网上书店</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-4">
+                    <ul class="top-menu text-right list-inline">
+                        <li th:if="${session.USERINFO} ne null" class="dropdown cart-nav dropdown-slide">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
+                                    class="tf-ion-android-cart"></i>购物车</a>
+                            <div class="dropdown-menu cart-dropdown">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object" src="images/shop/cart/cart-1.jpg" alt="image"/>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="">Ladies Bag</a></h4>
+                                        <div class="cart-price">
+                                            <span>1 x</span>
+                                            <span>1250.00</span>
+                                        </div>
+                                        <h5><strong>$1200</strong></h5>
+                                    </div>
+                                    <a href="#" class="remove"><i class="tf-ion-close"></i></a>
+                                </div>
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object" src="images/shop/cart/cart-2.jpg" alt="image"/>
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="">Ladies Bag</a></h4>
+                                        <div class="cart-price">
+                                            <span>1 x</span>
+                                            <span>1250.00</span>
+                                        </div>
+                                        <h5><strong>$1200</strong></h5>
+                                    </div>
+                                    <a href="#" class="remove"><i class="tf-ion-close"></i></a>
+                                </div>
+                                <div class="cart-summary">
+                                    <span>合计</span>
+                                    <span class="total-price">$1799.00</span>
+                                </div>
+                                <ul class="text-center cart-buttons">
+                                    <li><a href="" class="btn btn-small">查看购物车</a></li>
+                                    <li><a href="" class="btn btn-small btn-solid-border">结算</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="dropdown search dropdown-slide">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+                                <i class="tf-ion-ios-search-strong"></i> 搜索</a>
+                            <ul class="dropdown-menu search-dropdown">
+                                <li>
+                                    <form action="post"><input type="search" class="form-control" placeholder="Search...">
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li th:if="${session.USERINFO} eq null" class="dropdown text-right dropdown-slide">
+                            <a href="/login.html" >
+                                <i class="tf-ion-ios-"></i> 登录</a>
+                        </li>
+                        <li th:if="${session.USERINFO} eq null" class="dropdown text-right dropdown-slide">
+                            <a href="/register.html" >
+                                <i class="tf-ion-ios-"></i> 注册</a>
+                        </li>
+                        <li th:if="${session.USERINFO} ne null" class="dropdown text-right dropdown-slide">
+                            <a href="#" class="dropdown-toggle text-right" data-toggle="dropdown" data-hover="dropdown"
+                               data-delay="300" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.USERINFO.uName}"><span
+                                    class="tf-ion-ios-arrow-down"></span></a>
+                            <ul class="dropdown-menu" >
+                                <li><a href="/info">个人信息</a></li>
+                                <li><a href="blog-full-width.html">我的订单</a></li>
+                                <li><a href="/loginout">退出登录</a></li>
+                            </ul>
+                        </li>
+                        <li th:if="${session.USERINFO} ne null and ${session.USERINFO.uIsAdmin} eq 0" class="dropdown text-right dropdown-slide">
+                            <a href="/admin" >
+                                <i class="tf-ion-ios-"></i> 后台</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="menu">
+        <nav class="navbar navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <h2 class="menu-title">Main Menu</h2>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse text-center">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown ">
+                            <a href="/index.html">主页</a>
+                        </li>
+                        <li class="dropdown dropdown-slide">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                               data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">分类<span
+                                    class="tf-ion-ios-arrow-down"></span></a>
+                            <ul class="dropdown-menu" >
+                                <li th:each="type:${session.typeList}"><a th:href="'/toShop/'+${type.tId}+'/1'" th:text="${type.tName}">文学</a></li>
+                            </ul>
+                        </li>
+                        <li >
+                            <a href="/toShop" >热门</a>
+                        </li>
+                        <li>
+                            <a href="product-single.html">排行</a>
+                        </li>
+                        <li class="dropdown dropdown-slide">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                               data-delay="350" role="button" aria-haspopup="true" aria-expanded="false">Blog
+                                <span class="tf-ion-ios-arrow-down"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="blog-full-width.html">Blog Left Sidebar</a></li>
+                                <li><a href="blog-full-width.html">Blog Right Sidebar</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+</header>
+
+<div th:fragment="foot" style="top: 0">
+
+    <footer class="footer section text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="social-media">
+                        <li>
+                            <a href="">
+                                <i class="tf-ion-social-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="tf-ion-social-instagram"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="tf-ion-social-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="tf-ion-social-pinterest"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="footer-menu">
+                        <li>
+                            <a href="">联系我们</a>
+                        </li>
+                        <li>
+                            <a href="">商城</a>
+                        </li>
+                        <li>
+                            <a href="">服务</a>
+                        </li>
+                        <li>
+                            <a href="">技术支持</a>
+                        </li>
+                    </ul>
+                    <p class="copyright-text"><a href="" target="_blank" title=""></a>
+                        <a href="http://www.cssmoban.com/" title="" target="_blank"></a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a class="btn btn--success btn--floating box-shadow-wide" target="_blank" href="#products/aviato-e-commerce-template/">
+    <span class="btn__text">
+        Purchase Full Template Pack
+    </span>
+    </a>
+</div>
+
+<nav th:fragment="adminLeft" class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+                <div class="nav-profile-image">
+                    <img src="/images/faces/face.jpeg" alt="profile">
+                    <span class="login-status online"></span>
+                </div>
+                <div class="nav-profile-text d-flex flex-column">
+                    <span class="font-weight-bold mb-2" th:text="${session.USERINFO.uName}">你的名字</span>
+                    <span class="text-secondary text-small">管理员</span>
+                </div>
+                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/admin">
+                <span class="menu-title">主页</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/adminType">
+                <span class="menu-title">用户</span>
+                <i class="mdi mdi-bookmark menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/adminType">
+                <span class="menu-title">类别</span>
+                <i class="mdi mdi-bookmark menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/adminType">
+                <span class="menu-title">文章</span>
+                <i class="mdi mdi-bookmark menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/adminType">
+                <span class="menu-title">购物车</span>
+                <i class="mdi mdi-bookmark menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/adminType">
+                <span class="menu-title">订单</span>
+                <i class="mdi mdi-bookmark menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/adminType">
+                <span class="menu-title">用户评价</span>
+                <i class="mdi mdi-bookmark menu-icon"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<nav th:fragment="adminHead" class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="index.html"><img src="/images/logo.png" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/images/logo-mini.svg" alt="logo"/></a>
+    </div>
+
+    <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <div class="search-field d-none d-md-block">
+            <form class="d-flex align-items-center h-100" action="#">
+                <div class="input-group">
+                    <div class="input-group-prepend bg-transparent">
+                        <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                    </div>
+                    <input type="text" class="form-control bg-transparent border-0" placeholder="搜索">
+                </div>
+            </form>
+        </div>
+
+        <ul class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+                <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown"
+                   aria-expanded="false">
+                    <div class="nav-profile-img">
+                        <img src="/images/faces/face.jpeg" alt="image">
+                        <span class="availability-status online"></span>
+                    </div>
+                    <div class="nav-profile-text" >
+                        <p class="mb-1 text-black" th:text="${session.USERINFO.uName}">名字</p>
+                    </div>
+                </a>
+                <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                    <a class="dropdown-item" href="#">
+                        <i class="mdi mdi-cached mr-2 text-success"></i>
+                        活动日志
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/loginout">
+                        <i class="mdi mdi-logout mr-2 text-primary"></i>
+                        退出登录
+                    </a>
+                </div>
+            </li>
+
+            <li class="nav-item d-none d-lg-block full-screen-link">
+                <a class="nav-link">
+                    <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+                   data-toggle="dropdown">
+                    <i class="mdi mdi-bell-outline"></i>
+                    <span class="count-symbol bg-danger"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                     aria-labelledby="notificationDropdown">
+                    <h6 class="p-3 mb-0">通知</h6>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-success">
+                                <i class="mdi mdi-calendar"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                            <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
+                            <p class="text-gray ellipsis mb-0">
+                                第一条通知
+                            </p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+
+                    <h6 class="p-3 mb-0 text-center">查看所有通知</h6>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</nav>

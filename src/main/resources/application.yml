@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  address: localhost
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+  thymeleaf:
+    cache: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookstore?characterEncoding=utf-8
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+mybatis:
+  config-location: classpath:mapper/config/sqlMapConfig.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: xyz.hpwyx.manager.pojo

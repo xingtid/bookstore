@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>注册 </title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+</head>
+<body>
+<div class="wrap login_wrap">
+    <div class="content">
+
+        <div class="logo"></div>
+
+        <div class="login_box">
+
+            <div class="login_form">
+                <div class="login_title">
+                    注册
+                </div>
+                <form action="" method="post" id="formlogin">
+
+                    <div class="form_text_ipt">
+                        <input name="uUsername" id="uUsername" type="text" placeholder="手机号/邮箱" required>
+                    </div>
+                    <div class="ececk_warning" id="uscheck"><span>数据不能为空</span></div>
+                    <div class="form_text_ipt">
+                        <input name="uPassword" type="password" id="uPassword" placeholder="密码" required>
+                    </div>
+                    <div class="ececk_warning" id="recheck"><span>数据不能为空</span></div>
+                    <div class="form_text_ipt">
+                        <input name="repassword" id="repassword" type="password" placeholder="重复密码">
+                    </div>
+                    <div class="ececk_warning" id="pacheck"><span id = "msg">密码不一致</span></div>
+<!--                    <div class="form_text_ipt">-->
+<!--                        <input name="code" type="text" placeholder="验证码">-->
+<!--                    </div>-->
+<!--                    <div class="ececk_warning"><span>数据不能为空</span></div>-->
+
+                    <div class="form_btn">
+                        <button type="button" onclick="register()">注册</button>
+                    </div>
+                    <div class="form_reg_btn">
+                        <span>已有帐号？</span><a href="/login.html">马上登录</a>
+                    </div>
+                </form>
+                <div class="other_login">
+                    <div class="left other_left">
+                        <span>其它登录方式</span>
+                    </div>
+                    <div class="right other_right">
+                        <a href="#">QQ登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.min.js" ></script>
+<script>
+    function register() {
+        let length = $("#uUsername").val().length;
+        let length2 = $("#uPassword").val().length;
+        let length3 = $("#repassword").val().length;
+        if (length <1 ){
+            $("#uscheck").show();
+        }else if (length2 <1 ){
+            if (length3 <1 ){
+                $("#pacheck").show();
+            }
+            $("#recheck").show();
+        }else if( $("#uUsername").val() !== $("#repassword").val()){
+            $("#pacheck").show();
+        }else{
+            $.post("/register", $("#formlogin").serialize(), function (data) {
+                let ref;
+                ref = $("#ref").val();
+                if (data.resultCode === 200) {
+                    location.href = "http://localhost:8080/login.html";
+                } else {
+                    $("#msg").text(data.msg)
+                    $("#pacheck").show();
+                    $("#recheck").hide()
+                    $("#uscheck").hide()
+                }
+            });
+        }
+    }
+</script>
+</body>
+</html>

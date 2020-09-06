@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.hpwyx.manager.mapper.BUserMapper" >
+  <resultMap id="BaseResultMap" type="xyz.hpwyx.manager.pojo.BUser" >
+    <id column="u_id" property="uId" jdbcType="INTEGER" />
+    <result column="u_username" property="uUsername" jdbcType="VARCHAR" />
+    <result column="u_password" property="uPassword" jdbcType="VARCHAR" />
+    <result column="u_name" property="uName" jdbcType="VARCHAR" />
+    <result column="u_age" property="uAge" jdbcType="INTEGER" />
+    <result column="u_education" property="uEducation" jdbcType="VARCHAR" />
+    <result column="u_email" property="uEmail" jdbcType="VARCHAR" />
+    <result column="u_phone" property="uPhone" jdbcType="VARCHAR" />
+    <result column="u_address" property="uAddress" jdbcType="VARCHAR" />
+    <result column="u_hobby" property="uHobby" jdbcType="VARCHAR" />
+    <result column="u_is_admin" property="uIsAdmin" jdbcType="VARCHAR" />
+    <result column="u_detail" property="uDetail" jdbcType="VARCHAR" />
+    <result column="u_mark" property="uMark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    u_id, u_username, u_password, u_name, u_age, u_education, u_email, u_phone, u_address,
+    u_hobby, u_is_admin, u_detail, u_mark
+  </sql>
+  <select id="findByUserName" resultMap="BaseResultMap" parameterType="xyz.hpwyx.manager.pojo.BUser">
+    select
+    <include refid="Base_Column_List" />
+    from b_user
+    where
+  <if test="uUsername != null">
+    u_username = #{uUsername}
+  </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from b_user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_user
+    where u_id = #{uId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xyz.hpwyx.manager.pojo.BUser" >
+    insert into b_user (u_id, u_username, u_password,
+      u_name, u_age, u_education, 
+      u_email, u_phone, u_address, 
+      u_hobby, u_is_admin, u_detail, 
+      u_mark)
+    values (#{uId,jdbcType=INTEGER}, #{uUsername,jdbcType=VARCHAR}, #{uPassword,jdbcType=VARCHAR}, 
+      #{uName,jdbcType=VARCHAR}, #{uAge,jdbcType=INTEGER}, #{uEducation,jdbcType=VARCHAR}, 
+      #{uEmail,jdbcType=VARCHAR}, #{uPhone,jdbcType=VARCHAR}, #{uAddress,jdbcType=VARCHAR}, 
+      #{uHobby,jdbcType=VARCHAR}, #{uIsAdmin,jdbcType=VARCHAR}, #{uDetail,jdbcType=VARCHAR}, 
+      #{uMark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BUser" >
+    insert into b_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        u_id,
+      </if>
+      <if test="uUsername != null" >
+        u_username,
+      </if>
+      <if test="uPassword != null" >
+        u_password,
+      </if>
+      <if test="uName != null" >
+        u_name,
+      </if>
+      <if test="uAge != null" >
+        u_age,
+      </if>
+      <if test="uEducation != null" >
+        u_education,
+      </if>
+      <if test="uEmail != null" >
+        u_email,
+      </if>
+      <if test="uPhone != null" >
+        u_phone,
+      </if>
+      <if test="uAddress != null" >
+        u_address,
+      </if>
+      <if test="uHobby != null" >
+        u_hobby,
+      </if>
+      <if test="uIsAdmin != null" >
+        u_is_admin,
+      </if>
+      <if test="uDetail != null" >
+        u_detail,
+      </if>
+      <if test="uMark != null" >
+        u_mark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uId != null" >
+        #{uId,jdbcType=INTEGER},
+      </if>
+      <if test="uUsername != null" >
+        #{uUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="uPassword != null" >
+        #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uAge != null" >
+        #{uAge,jdbcType=INTEGER},
+      </if>
+      <if test="uEducation != null" >
+        #{uEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="uEmail != null" >
+        #{uEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uPhone != null" >
+        #{uPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="uAddress != null" >
+        #{uAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="uHobby != null" >
+        #{uHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="uIsAdmin != null" >
+        #{uIsAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="uDetail != null" >
+        #{uDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="uMark != null" >
+        #{uMark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.hpwyx.manager.pojo.BUser" >
+    update b_user
+    <set >
+      <if test="uUsername != null" >
+        u_username = #{uUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="uPassword != null" >
+        u_password = #{uPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="uName != null" >
+        u_name = #{uName,jdbcType=VARCHAR},
+      </if>
+      <if test="uAge != null" >
+        u_age = #{uAge,jdbcType=INTEGER},
+      </if>
+      <if test="uEducation != null" >
+        u_education = #{uEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="uEmail != null" >
+        u_email = #{uEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="uPhone != null" >
+        u_phone = #{uPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="uAddress != null" >
+        u_address = #{uAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="uHobby != null" >
+        u_hobby = #{uHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="uIsAdmin != null" >
+        u_is_admin = #{uIsAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="uDetail != null" >
+        u_detail = #{uDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="uMark != null" >
+        u_mark = #{uMark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.hpwyx.manager.pojo.BUser" >
+    update b_user
+    set u_username = #{uUsername,jdbcType=VARCHAR},
+      u_password = #{uPassword,jdbcType=VARCHAR},
+      u_name = #{uName,jdbcType=VARCHAR},
+      u_age = #{uAge,jdbcType=INTEGER},
+      u_education = #{uEducation,jdbcType=VARCHAR},
+      u_email = #{uEmail,jdbcType=VARCHAR},
+      u_phone = #{uPhone,jdbcType=VARCHAR},
+      u_address = #{uAddress,jdbcType=VARCHAR},
+      u_hobby = #{uHobby,jdbcType=VARCHAR},
+      u_is_admin = #{uIsAdmin,jdbcType=VARCHAR},
+      u_detail = #{uDetail,jdbcType=VARCHAR},
+      u_mark = #{uMark,jdbcType=VARCHAR}
+    where u_id = #{uId,jdbcType=INTEGER}
+  </update>
+</mapper>

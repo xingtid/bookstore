@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>沁香园网上书店</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href=""/>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/slick-theme.css"/>
+    <link rel="stylesheet" href="/css/stylea.css">
+</head>
+<body id="body">
+<div th:replace="head::head"></div>
+<section class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content">
+                    <h1 class="page-name">Shop</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="/">主页</a></li>
+                        <li class="active" ></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="products section">
+    <div class="container">
+        <div class="row">
+            <div th:each="item:${page.list}" class="col-md-4">
+                <div class="product-item">
+                    <div class="product-thumb">
+<!--                        <span class="bage">Sale</span>-->
+                        <img class="img-responsive" th:src="${item.bPic}" alt="图片丢失"/>
+                        <div class="preview-meta">
+                            <ul>
+                                <li>
+                                    <a th:href="'/toBookInfo/'+${item.bId}"><i class="tf-ion-ios-search-strong"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="tf-ion-ios-heart"></i></a>
+                                </li>
+                                <li>
+                                    <a href=""><i class="tf-ion-android-cart"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product-content">
+                        <h4><a th:href="'/toBookInfo/'+${item.bId}" th:text="${item.bName}"></a></h4>
+                        <p class="price" th:text="'￥'+${item.bPrice}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal product-modal fade" id="product-modal">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="tf-ion-close"></i>
+                </button>
+                <div class="modal-dialog " role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                    <div class="modal-image">
+                                        <img class="img-responsive" src="images/shop/products/modal-product.jpg"
+                                             alt="product-img"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-6 col-xs-12">
+                                    <div class="product-short-details">
+                                        <h2 class="product-title">GM Pendant, Basalt Grey</h2>
+                                        <p class="product-price">$200</p>
+                                        <p class="product-short-description">
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem iusto nihil
+                                            cum. Illo laborum numquam rem aut officia dicta cumque.
+                                        </p>
+                                        <a href="cart.html" class="btn btn-main">Add To Cart</a>
+                                        <a href="product-single.html" class="btn btn-transparent">View Product
+                                            Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal -->
+
+        </div>
+        <div class="text-center">
+            <ul class="pagination post-pagination">
+                <!-- 首页 -->
+                <li>
+                    <a th:href="'/toShop/'+${type}+'/0'">首页</a>
+                </li>
+
+                <!-- 上一页 -->
+                <li th:if="${page.isHasPreviousPage()}">
+                    <a th:href="'/toShop/'+${type}+'/' + ${page.getPrePage()}" th:text="上一页"></a>
+                </li>
+
+                <!-- 中间页 -->
+                <li th:each="pageNum:${#numbers.sequence(0, page.getPages()-1)}">
+                    <a th:href="'/toShop/'+${type}+'/' + ${pageNum+ 1}" th:text="${pageNum + 1}" th:if="${pageNum ne page.getPageNum()-1}"></a>
+                    <a th:href="'/toShop/'+${type}+'/' + ${pageNum+ 1}" th:text="${pageNum + 1}" th:if="${pageNum eq page.getPageNum()-1}" th:style="'font-weight:bold;background: #6faed9;'"></a>
+                </li>
+
+                <!-- 下一页 -->
+                <li th:if="${page.isHasNextPage()}">
+                    <a th:href="'/toShop/'+${type}+'/' + ${page.getNextPage()}" th:text="下一页"></a>
+                </li>
+
+                <!-- 尾页 -->
+                <li>
+                    <a th:href="'/toShop/'+${type}+'/' + ${page.getPages()}">尾页</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<<div th:replace="head::foot"></div>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/slick.min.js"></script>
+<script src="/js/script.js"></script>
+
+</body>
+</html>
