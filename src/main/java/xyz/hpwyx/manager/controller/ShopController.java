@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.hpwyx.manager.pojo.BBook;
 import xyz.hpwyx.manager.service.impl.BookServiceImpl;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 @Controller
 public class ShopController {
@@ -32,6 +35,9 @@ public class ShopController {
     @RequestMapping(value = "toBookInfo/{bookId}")
     public String toBookInfo(@PathVariable Integer bookId, Model model) {
         BBook bBook = bookService.get (bookId);
+        String[] split = bBook.getbPic ().split ("\\|");
+        List<String> picList = Arrays.asList (split);
+        bBook.setPicList (picList);
         model.addAttribute ("book",bBook);
         return "bookInfo";
     }

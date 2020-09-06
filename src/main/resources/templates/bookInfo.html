@@ -37,14 +37,11 @@
                         <div class='carousel-outer'>
                             <!-- me art lab slider -->
                             <div class='carousel-inner '>
-                                <div class='item active'>
-                                    <img  th:src="${book.bPic}"  alt='' th:data-zoom-image="${book.bPic}" />
+                                <div th:each="pic,userStat:${book.picList}" th:if="${userStat.index eq 0}" class='item active'>
+                                    <img  th:src="${pic}"  alt='' th:data-zoom-image="${pic}" />
                                 </div>
-                                <div class='item'>
-                                    <img src='images/shop/single-products/product-2.jpg' alt='' data-zoom-image="images/shop/single-products/product-2.jpg" />
-                                </div>
-                                <div class='item'>
-                                    <img src='images/shop/single-products/product-3.jpg' alt='' data-zoom-image="images/shop/single-products/product-3.jpg" />
+                                <div th:each="pic,userStat:${book.picList}" th:if="${userStat.index ne 0}" class='item'>
+                                    <img th:src="${pic}" alt='' th:data-zoom-image="${pic}" />
                                 </div>
                             </div>
 
@@ -59,14 +56,11 @@
 
                         <!-- thumb -->
                         <ol class='carousel-indicators mCustomScrollbar meartlab'>
-                            <li data-target='#carousel-custom' data-slide-to='0' class='active'>
-                                <img th:src="${book.bPic}"  alt='' />
+                            <li  th:each="pic,userStat:${book.picList}" th:if="${userStat.index eq 0}" data-target='#carousel-custom' th:data-slide-to='${userStat.index}' class='active'>
+                                <img th:src="${pic}"  alt='' />
                             </li>
-                            <li data-target='#carousel-custom' data-slide-to='1'>
-                                <img src='images/shop/single-products/product-2.jpg' alt='' />
-                            </li>
-                            <li data-target='#carousel-custom' data-slide-to='2'>
-                                <img src='images/shop/single-products/product-3.jpg' alt='' />
+                            <li th:each="pic,userStat:${book.picList}" th:if="${userStat.index ne 0}" data-target='#carousel-custom' th:data-slide-to='${userStat.index}'>
+                                <img th:src="${pic}" alt='' />
                             </li>
                         </ol>
                     </div>
@@ -91,7 +85,7 @@
                     <div class="product-quantity">
                         <span>数量:</span>
                         <div class="product-quantity-slider">
-                            <input id="product-quantity" type="text" value="0" name="product-quantity">
+                            <input id="product-quantity" type="text" value="1" name="product-quantity">
                         </div>
                     </div>
 <!--                    <div class="product-category">-->
@@ -101,7 +95,8 @@
 <!--                            <li><a href="#">Soap</a></li>-->
 <!--                        </ul>-->
 <!--                    </div>-->
-                    <a href="cart.html" class="btn btn-main mt-20" style="font-size: 18px">添加到购物车</a>
+                    <input type="hidden" th:value="${book.bId}" id="bookId">
+                    <a href="#" class="btn btn-main mt-20" style="font-size: 18px" onclick="addCart()">添加到购物车</a>
                 </div>
             </div>
         </div>
@@ -318,6 +313,24 @@
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/slick.min.js"></script>
 <script src="/js/script.js"></script>
-
+<script>
+    function addCart() {
+        let bookId = $("#bookId").val()
+        let quantity = $("#product-quantity").val()
+        if (quantity <1 ){
+            alert("数量为0")
+        }else{
+            $.get("/addBook/"+bookId+"/"+quantity, function (data) {
+                if (data.resultCode === 200) {
+                    alert("添加成功")
+                } else {
+                    alert("添加失败")
+                    // $("#msg").text(data.msg)
+                    // $("#pacheck").show();
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>

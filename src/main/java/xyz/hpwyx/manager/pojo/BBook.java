@@ -1,6 +1,8 @@
 package xyz.hpwyx.manager.pojo;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 public class BBook {
     private Integer bId;
@@ -30,6 +32,7 @@ public class BBook {
     private String bMark;
 
     private Integer pageNum;
+    private List<String> picList;
 
     public Integer getbId() {
         return bId;
@@ -120,7 +123,15 @@ public class BBook {
     }
 
     public String getbPic() {
-        return bPic;
+        if (this.bPic == null){
+            return null;
+        }
+        String[] split = this.bPic.split ("\\|");
+        List<String> picList = Arrays.asList (split);
+        if (picList.size ()>0){
+            return picList.get (0);
+        }
+        return null;
     }
 
     public void setbPic(String bPic) {
@@ -144,5 +155,13 @@ public class BBook {
 
     public void setPageNum(Integer pageNum) {
         this.pageNum = pageNum;
+    }
+
+    public List<String> getPicList() {
+        return picList;
+    }
+
+    public void setPicList(List<String> picList) {
+        this.picList = picList;
     }
 }
