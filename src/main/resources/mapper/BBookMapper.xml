@@ -39,6 +39,12 @@
             </if>
         </where>
     </select>
+    <select id="findListRandom" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from b_book
+        order by rand() limit 9
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete

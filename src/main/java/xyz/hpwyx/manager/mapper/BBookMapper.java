@@ -14,6 +14,7 @@ public interface BBookMapper {
     int insertSelective(BBook record);
     BBook selectByPrimaryKey(Integer bId);
     List<BBook> findList(BBook record);
+    List<BBook> findListRandom(BBook record);
     int updateByPrimaryKeySelective(BBook record);
     int updateByPrimaryKey(BBook record);
 }

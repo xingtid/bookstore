@@ -19,6 +19,15 @@
     from b_shop_cart
     where c_id = #{cId,jdbcType=INTEGER}
   </select>
+  <select id="findCartList" resultType="CartWithBook">
+    select
+      c_id AS "id", c_count AS "cCount", c_book_id AS "cBookId" , c_price AS "cPrice",
+           c_all AS "cAll", c_mark AS "bMark" ,
+    b.b_name AS "name",b.b_price AS "singalPrice" ,b.b_pic AS "img",b.b_introduce AS "goodTip"
+    from b_shop_cart
+    LEFT JOIN b_book b ON b.b_id = c_book_id
+    where c_user_id = #{cUserId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from b_shop_cart
     where c_id = #{cId,jdbcType=INTEGER}

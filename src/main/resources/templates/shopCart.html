@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>沁香园网上书店</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href=""/>
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body id="body">
+<div class="float-box">
+
+    <div class="confirm-box">
+
+        <h4 class="confirm-title">
+            <span></span>
+            <i class="close-btn">
+                <span class="line-left"></span>
+                <span class="line-right"></span>
+            </i>
+        </h4>
+        <div class="confirm-content">
+            请选择您要删除的商品？
+        </div>
+        <div class="confirm-btn">
+            <a href="javascript:" class="delete">删除</a>
+            <a href="javascript:" class="cancel">取消</a>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="header">
+    <div class="header-center">
+
+    </div>
+</div>
+<div class="mzContainer">
+    <div class= "check-container" >
+        <div class="shop-cart-nav">
+            <table>
+                <tr>
+                    <td class="check-area">
+                        <a href="javascript:;" class="check-label check-all">
+                            <i class="checkbox">
+                                <span class="check-mark"></span>
+                            </i>
+                            <em class="check-name">全选</em>
+                        </a>
+                    </td>
+                    <td class="singal-price">
+                        单价(元)
+                    </td>
+                    <td class="volumes">
+                        数量
+                    </td>
+                    <td class="small-total">
+                        小计(元)
+                    </td>
+                    <td class="edit-area">
+                        <span class="edit">编辑</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <ul class="goods-ul">
+            <li class="goods-list">
+                <table class= "goods-header" >
+                    <tr>
+                        <td colspan="5">
+                            <a href="javascript:" class="check-label check-local-part">
+                                <i class="checkbox">
+                                    <span class="check-mark"></span>
+                                </i>
+                                <em class="check-name">图书</em>
+                            </a>
+                        </td>
+                    </tr>
+                </table >
+                <table class="goods-body">
+                    <tr th:each="item:${cartList}">
+                        <td class="goods-col-select">
+                            <a href="javascript:" class="check-label check-product">
+                                <i class="checkbox">
+                                    <span class="check-mark"></span>
+                                </i>
+                            </a>
+                            <a href="javascript:" class="goods-img">
+                                <img th:src="${item.img}"
+                                     alt="">
+                            </a>
+                            <a href="javascript:" class="goods-info">
+                                <h4 class="goods-info-title" th:text="${item.name}"></h4>
+                                <p class="goods-info-tips" th:text="${item.goodTip}"></p>
+                            </a>
+                        </td>
+                        <td class="goods-col-price">
+                            <span th:text="'￥'+${item.singalPrice}"></span>
+                        </td>
+                        <td class="goods-col-volumes">
+                            <div class="num-ctrl-area clearfix">
+                                <button class="minus">-</button>
+                                <input type="text" value="1" class="input">
+                                <button class="plus">+</button>
+                                <em class="hint">限购10件</em>
+                            </div>
+                        </td>
+                        <td class="goods-col-total">
+                            <span></span>
+                        </td>
+                        <td class="goods-col-ctrl">
+                            <span>- -</span>
+                            <i class="del-product">
+                                <span class="line-left"></span>
+                                <span class="line-right"></span>
+                            </i>
+                        </td>
+                    </tr>
+                </table>
+            </li>
+        </ul>
+
+    </div >
+    <div class="shop-cart-footer">
+        <div class="cart-foot clearfix">
+            <div class="cart-foot-left">
+                <a href="javascript:" class="check-label check-all">
+                    <i class="checkbox">
+                        <span class="check-mark"></span>
+                    </i>
+                    <em class="check-name">全选</em>
+                </a>
+                <em class="goods-delete">删除选中的商品</em>
+                <em class="goods-num">
+                    共<span class="sum"></span>件商品，
+                    已选择&nbsp;<span class="sum-selected"></span>&nbsp;件
+                </em>
+            </div>
+            <div class="cart-foot-right">
+                <em class="total-bill">
+                    合计(不含运费)：
+                    <span class="bill-price"></span>
+                </em>
+                <a href="javascript:" class="order-btn ban-order">去结算</a>
+            </div>
+        </div>
+    </div>
+</div >
+<div class="mz-foot"></div>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="/js/cart.js"></script>
+
+</body>
+
+</html>

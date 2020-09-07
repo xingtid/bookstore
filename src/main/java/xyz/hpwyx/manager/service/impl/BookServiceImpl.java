@@ -24,6 +24,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public List<BBook> findBookList() {
+        return dao.findListRandom (new BBook ());
+    }
+
+    @Override
     public BBook get(Integer bId) {
         return dao.selectByPrimaryKey (bId);
     }
