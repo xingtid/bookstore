@@ -33,6 +33,7 @@ public class BBook {
 
     private Integer pageNum;
     private List<String> picList;
+    private String typeName;
 
     public Integer getbId() {
         return bId;
@@ -163,5 +164,13 @@ public class BBook {
 
     public void setPicList(List<String> picList) {
         this.picList = picList;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 }

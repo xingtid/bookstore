@@ -16,13 +16,19 @@
 <section class="page-header">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="content">
-                    <h1 class="page-name">Shop</h1>
+                    <h1 class="page-name" th:text="${typeName}">Shop</h1>
                     <ol class="breadcrumb">
                         <li><a href="/">主页</a></li>
                         <li class="active" ></li>
                     </ol>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="content" style="    height: 50px;">
+                    <form action="#"><input type="search" class="form-control" placeholder="搜索">
+                    </form>
                 </div>
             </div>
         </div>
@@ -33,7 +39,7 @@
 <section class="products section">
     <div class="container">
         <div class="row">
-            <div th:each="item:${page.list}" class="col-md-4">
+            <div th:each="item:${page.list}" class="col-md-4" style="height: 450px;">
                 <div class="product-item">
                     <div class="product-thumb">
 <!--                        <span class="bage">Sale</span>-->

@@ -5,12 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import xyz.hpwyx.manager.pojo.BBook;
-import xyz.hpwyx.manager.pojo.BBookType;
+import xyz.hpwyx.manager.pojo.*;
 import xyz.hpwyx.manager.service.BookService;
 import xyz.hpwyx.manager.service.BookTypeService;
+import xyz.hpwyx.manager.service.impl.CartServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,6 +24,8 @@ public class IndexController {
     private BookTypeService bookTypeService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private CartServiceImpl cartService;
 
     @RequestMapping(value = {"/","index.html"})
     public String index(Model model, HttpServletRequest request) {
@@ -30,9 +33,9 @@ public class IndexController {
         request.getSession ().setAttribute ("typeList", allType);
         List<BBook> bookList = bookService.findBookList ();
         model.addAttribute ("bookList",bookList);
+        findCart (model, request);
         return "index";
     }
-
 
     //  全局跳转
     @RequestMapping("/{page}.html")
@@ -40,8 +43,26 @@ public class IndexController {
         String url = request.getHeader ("REFERER");
         System.out.println (url);
         List<BBookType> allType = bookTypeService.findAllType ();
+        findCart (model, request);
         request.getSession ().setAttribute ("typeList", allType);
         model.addAttribute ("REFERER", url);
         return page;
+    }
+    private void findCart(Model model, HttpServletRequest request) {
+        BUser userinfo = (BUser) request.getSession ().getAttribute ("USERINFO");
+        if (userinfo != null){
+            BShopCart cart = new BShopCart ();
+            cart.setcUserId (userinfo.getuId ());
+            List<CartWithBook> cartList = cartService.findCartList (cart);
+            BigDecimal sum = new BigDecimal (0);
+            //计算购物车中总金额
+            for (CartWithBook item : cartList) {
+                sum =  sum.add (item.getcAll ());
+            }
+            request.getSession ().setAttribute ("cartList", cartList);
+            request.getSession ().setAttribute ("sumPrice", sum);
+            model.addAttribute ("cartList",cartList);
+            model.addAttribute ("sumPrice",sum);
+        }
     }
 }

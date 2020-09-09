@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>沁香园网上书店</title>
+    <title>沁香园网上书店-购物车</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href=""/>
     <link rel="stylesheet" href="/css/cart.css">
@@ -35,7 +35,7 @@
 
 <div class="header">
     <div class="header-center">
-
+        <a href="#" onclick="history.back(-1)">返回</a> <h4>沁香园 -购物车</h4>
     </div>
 </div>
 <div class="mzContainer">
@@ -103,9 +103,9 @@
                         <td class="goods-col-volumes">
                             <div class="num-ctrl-area clearfix">
                                 <button class="minus">-</button>
-                                <input type="text" value="1" class="input">
+                                <input type="text" th:value="${item.cCount}" class="input">
                                 <button class="plus">+</button>
-                                <em class="hint">限购10件</em>
+                                <em class="hint">限购3件</em>
                             </div>
                         </td>
                         <td class="goods-col-total">
@@ -149,8 +149,8 @@
         </div>
     </div>
 </div >
-<div class="mz-foot"></div>
 <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <script src="/js/cart.js"></script>
 
 </body>

@@ -21,12 +21,18 @@ public class ShopController {
     @RequestMapping(value = "toShop/{bTypeId}/{pageNum}")
     public String toShop(BBook bBook, @PathVariable Integer bTypeId,@PathVariable(required = false) Integer pageNum, Model model) {
         bBook.setbTypeId (bTypeId);
+        //如果没有传页数，默认第一页
         if (pageNum == null){
             pageNum = 1;
         }
         bBook.setPageNum (pageNum);
         PageInfo<BBook> pageInfo = bookService.findBookByType (bBook);
         model.addAttribute ("type",bBook.getbTypeId ());
+        //如果该分类下有商品
+        if (pageInfo.getList ().size () > 0){
+            //则
+            model.addAttribute ("typeName",pageInfo.getList ().get (0).getTypeName ());
+        }
         model.addAttribute ("page",pageInfo);
         model.addAttribute ("pageNum",bBook.getPageNum ());
         return "shop";

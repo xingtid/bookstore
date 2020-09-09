@@ -1,5 +1,8 @@
 package xyz.hpwyx.manager.common;
 
+/**
+ * 结果集 封装类  用于判断ajax请求结果是否成功，并返回错误或者成功消息
+ */
 public class Result {
     private Integer resultCode;
     private String msg;

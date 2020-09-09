@@ -12,10 +12,8 @@ import xyz.hpwyx.manager.service.BookService;
 import xyz.hpwyx.manager.service.impl.CartServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
@@ -38,19 +36,21 @@ public class CartController {
         cart.setcCount (count);
         cart.setcUserId (userinfo.getuId ());
         cart.setcPrice (bBook.getbPrice ());
+        cart.setcAll (bBook.getbPrice ().multiply (new BigDecimal (count)));
         cartService.insertCart (cart);
         return Result.success ();
     }
     @RequestMapping(value = "toShopCart")
     public String toShopCart( Model model, HttpServletRequest request) {
         BUser userinfo = (BUser) request.getSession ().getAttribute ("USERINFO");
-        //查找商品信息
+        //判断是否登录
         if (userinfo == null){
             model.addAttribute ("msg","请先登录");
             return "shopCart";
         }
         BShopCart cart = new BShopCart ();
         cart.setcUserId (userinfo.getuId ());
+        //
         List<CartWithBook> cartList = cartService.findCartList (cart);
         model.addAttribute ("cartList",cartList);
         return "shopCart";

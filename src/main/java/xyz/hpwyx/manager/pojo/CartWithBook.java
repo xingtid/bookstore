@@ -3,7 +3,6 @@ package xyz.hpwyx.manager.pojo;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class CartWithBook {
     private Integer id;
@@ -33,6 +32,9 @@ public class CartWithBook {
     private Integer cCount;
 
     private Integer cBookId;
+    private BigDecimal cPrice;
+    private BigDecimal cAll;
+    private BigDecimal cTotal;
 
     public Integer getId() {
         return id;
@@ -161,5 +163,29 @@ public class CartWithBook {
 
     public void setGoodTip(String goodTip) {
         this.goodTip = goodTip;
+    }
+
+    public BigDecimal getcPrice() {
+        return cPrice;
+    }
+
+    public void setcPrice(BigDecimal cPrice) {
+        this.cPrice = cPrice;
+    }
+
+    public BigDecimal getcAll() {
+        return cAll;
+    }
+
+    public void setcAll(BigDecimal cAll) {
+        this.cAll = cAll;
+    }
+
+    public BigDecimal getcTotal() {
+        return cTotal;
+    }
+
+    public void setcTotal(BigDecimal cTotal) {
+        this.cTotal = cTotal;
     }
 }

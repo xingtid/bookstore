@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     public int register(BUser user) {
         user.setuName (user.getuUsername ());
+        user.setuIsAdmin ("1");
         dao.insert (user);
         return 1;
     }

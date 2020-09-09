@@ -25,37 +25,24 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i
                                     class="tf-ion-android-cart"></i>购物车</a>
                             <div class="dropdown-menu cart-dropdown">
-                                <div class="media">
+                                <div class="media" th:each="item:${session.cartList}">
                                     <a class="pull-left" href="#">
-                                        <img class="media-object" src="images/shop/cart/cart-1.jpg" alt="image"/>
+                                        <img class="media-object" th:src="${item.img}" alt="image"/>
                                     </a>
                                     <div class="media-body">
-                                        <h4 class="media-heading"><a href="">Ladies Bag</a></h4>
+                                        <h4 class="media-heading"><a href="" th:text="${item.name}">Ladies Bag</a></h4>
                                         <div class="cart-price">
-                                            <span>1 x</span>
-                                            <span>1250.00</span>
+                                            <span th:text="${item.cCount}+'x'">1 </span>
+                                            <span th:text="${item.singalPrice}">1250.00</span>
                                         </div>
-                                        <h5><strong>$1200</strong></h5>
+                                        <h5><strong th:text="'￥'+${item.cAll}">$1200</strong></h5>
                                     </div>
                                     <a href="#" class="remove"><i class="tf-ion-close"></i></a>
                                 </div>
-                                <div class="media">
-                                    <a class="pull-left" href="#">
-                                        <img class="media-object" src="images/shop/cart/cart-2.jpg" alt="image"/>
-                                    </a>
-                                    <div class="media-body">
-                                        <h4 class="media-heading"><a href="">Ladies Bag</a></h4>
-                                        <div class="cart-price">
-                                            <span>1 x</span>
-                                            <span>1250.00</span>
-                                        </div>
-                                        <h5><strong>$1200</strong></h5>
-                                    </div>
-                                    <a href="#" class="remove"><i class="tf-ion-close"></i></a>
-                                </div>
+
                                 <div class="cart-summary">
                                     <span>合计</span>
-                                    <span class="total-price">$1799.00</span>
+                                    <span class="total-price" th:text="'￥'+${sumPrice}">$1799.00</span>
                                 </div>
                                 <ul class="text-center cart-buttons">
                                     <li><a href="/toShopCart" class="btn btn-small">查看购物车</a></li>
@@ -69,7 +56,7 @@
                                 <i class="tf-ion-ios-search-strong"></i> 搜索</a>
                             <ul class="dropdown-menu search-dropdown">
                                 <li>
-                                    <form action="post"><input type="search" class="form-control" placeholder="Search...">
+                                    <form action="post"><input type="search" class="form-control" placeholder="搜索">
                                     </form>
                                 </li>
                             </ul>

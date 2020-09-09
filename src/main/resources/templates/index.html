@@ -23,7 +23,7 @@
                             <h1>书店</h1>
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aut illum ratione?
                                 <br> Aliquam facilis dolorem dolor illum saepe commodi ratione.</p>
-                            <a href="" class="btn btn-main">Buy Now</a>
+                            <a href="" class="btn btn-main">购买</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
              style="background-image:url('/images/slider/slider-3.jpg'); background-position:50%;background-repeat:no-repeat;">
             <div class="container">
                 <div class="slide-inner text-left">
-                    <h1>Stylish & Scalable</h1>
+                    <h1>浏览</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae aut illum ratione? <br>
                         Aliquam facilis dolorem dolor illum saepe commodi ratione.</p>
                     <a href="" class="btn btn-main">Buy Now</a>
@@ -63,13 +63,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="title text-center">
-                    <h2>Product Category</h2>
+                    <h2>书籍分类</h2>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="category-box">
                     <a href="">
-                        <img src="images/shop/category/category-1.jpg" alt=""/>
+                        <img src="http://img56.ddimg.cn/9006260176098816.jpg" alt=""/>
                         <div class="content">
                             <h3>Clothes Sales</h3>
                             <p>Shop New Season Clothing</p>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="category-box">
                     <a href="">
-                        <img src="images/shop/category/category-2.jpg" alt=""/>
+                        <img src="http://img61.ddimg.cn/topic_img/gys_0016342/rc750x315.jpg" alt=""/>
                         <div class="content">
                             <h3>Smart Casuals</h3>
                             <p>Get Wide Range Selection</p>
@@ -89,7 +89,7 @@
             <div class="col-md-6">
                 <div class="category-box category-box-2">
                     <a href="">
-                        <img src="images/shop/category/category-3.jpg" alt=""/>
+                        <img src="http://img63.ddimg.cn/topic_img/gys_0016342/yxjzz1200x1800.jpg" alt=""/>
                         <div class="content">
                             <h3>Jewellery</h3>
                             <p>Special Design Comes First</p>
@@ -97,20 +97,41 @@
                     </a>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="category-box">
+                    <a href="">
+                        <img src="http://img63.ddimg.cn/topic_img/gys_0015409/0825trhxdkyc750315.jpg" alt=""/>
+                        <div class="content">
+                            <h3>Jewellery</h3>
+                            <p>Special Design Comes First</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+<!--            <div class="col-md-12">-->
+<!--                <div class="category-box">-->
+<!--                    <a href="">-->
+<!--                        <img src="http://img62.ddimg.cn/topic_img/gys_0016105/ysqqspt750315.jpg" alt=""/>-->
+<!--                        <div class="content">-->
+<!--                            <h3>Jewellery</h3>-->
+<!--                            <p>Special Design Comes First</p>-->
+<!--                        </div>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
     </div>
 </section>
-<div class="tlinks">Collect from <a href="http://www.cssmoban.com/">自助建站</a></div>
 <section class="products section bg-gray">
     <div class="container">
         <div class="row">
             <div class="title text-center">
-                <h2>Trendy Products</h2>
+                <h2>推荐书籍</h2>
             </div>
         </div>
         <div class="row">
 
-            <div th:each="book:${bookList}" class="col-md-4">
+            <div th:each="book:${bookList}" class="col-md-4" style="height: 450px;">
                 <div class="product-item">
                     <div class="product-thumb">
                         <span class="bage">Sale</span>
@@ -181,15 +202,14 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="title">
-                    <h2>SUBSCRIBE TO NEWSLETTER</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugiat, <br> facilis numquam impedit ut
-                        sequi. Minus facilis vitae excepturi sit laboriosam.</p>
+                    <h2>欢迎来到书店</h2>
+                    <p>在这里寻找最适合你灵魂的书籍</p>
                 </div>
                 <div class="col-lg-6 col-md-offset-3">
                     <div class="input-group subscription-form">
-                        <input type="text" class="form-control" placeholder="Enter Your Email Address">
+                        <input type="text" class="form-control" placeholder="输入你喜欢的书籍名称或者作者名称">
                         <span class="input-group-btn">
-				        <button class="btn btn-main" type="button">Subscribe Now!</button>
+				        <button class="btn btn-main" type="button">开启!</button>
 				      </span>
                     </div>
                 </div>
