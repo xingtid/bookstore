@@ -208,4 +208,12 @@
             b_mark      = #{bMark,jdbcType=VARCHAR}
         where b_id = #{bId,jdbcType=INTEGER}
     </update>
+    <select id="countBookByType" resultType="java.lang.Integer">
+        select count(1) from b_book
+        <where>
+            <if test="bTypeId != null">
+                bTypeId = #{bTypeId}
+            </if>
+        </where>
+    </select>
 </mapper>

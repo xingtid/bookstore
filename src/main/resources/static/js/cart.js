@@ -1,5 +1,5 @@
 (function (win, undefined) {
-
+    var id=0;
     var ShopCart = function () {
         this.judge = '';
         this.curUnitBtn = null;
@@ -167,7 +167,7 @@
                 value--;
                 if (value < 1) {
                     return;
-                };
+                }
                 shopCart.buttonCss($this.parent().find(shopCart.button), value);
                 $this.next().val(value);
                 shopCart.calcInfo();
@@ -222,6 +222,7 @@
         singalDel: function () {
             var shopCart = this;
             this.delProduct.on("click", function () {
+                id = $(this).attr("data-id")
                 shopCart.judge = "singal";
                 shopCart.curUnitBtn = $(this);
                 shopCart.floatBox.fadeIn(200);
@@ -234,7 +235,10 @@
         //悬浮提示框中的确定删除点击事件
         floatDelBtn: function () {
             var shopCart = this;
+
+
             shopCart.delBtn.on("click", function () {
+                alert(id)
                 shopCart.floatBox.fadeOut(200);
                 if (shopCart.judge == "global") {
                     shopCart.checkProductEd.closest(shopCart.goodsTr).remove();
@@ -242,9 +246,14 @@
                         shopCart.checkLocalPartEd.closest(shopCart.goodsList).remove();
                         if (shopCart.checkAll.hasClass(shopCart.checked)) {
                             shopCart.mzContainer.html("").css("height", '25rem');
-                        };
-                    };
+                        }
+                    }
                 } else if (shopCart.judge == "singal") {
+                    $.get("/delCar/"+shopCart.id,  function (data) {
+                        if (data.resultCode === 200) {
+                        } else {
+                        }
+                    });
                     var curLiIndex = shopCart.curUnitBtn.closest(shopCart.goodsList).index();
                     shopCart.curUnitBtn.closest(shopCart.goodsTr).remove();
 
@@ -252,6 +261,7 @@
                         console.log(1)
                         shopCart.goodsList.eq(curLiIndex).remove();
                     };
+
                 };
                 shopCart.dynamic1Obj();
                 shopCart.dynamic2Obj();

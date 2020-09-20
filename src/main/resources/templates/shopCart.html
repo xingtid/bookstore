@@ -35,7 +35,7 @@
 
 <div class="header">
     <div class="header-center">
-        <a href="#" onclick="history.back(-1)">返回</a> <h4>沁香园 -购物车</h4>
+        <a href="#" onclick="history.back(-1)">返回</a> <h4 style="text-align: center;">沁香园 -购物车</h4>
     </div>
 </div>
 <div class="mzContainer">
@@ -114,8 +114,8 @@
                         <td class="goods-col-ctrl">
                             <span>- -</span>
                             <i class="del-product">
-                                <span class="line-left"></span>
-                                <span class="line-right"></span>
+                                <span class="line-left" th:data-id = "${item.id}"></span>
+                                <span class="line-right" th:data-id = "${item.id}"></span>
                             </i>
                         </td>
                     </tr>
@@ -133,7 +133,7 @@
                     </i>
                     <em class="check-name">全选</em>
                 </a>
-                <em class="goods-delete">删除选中的商品</em>
+<!--                <em class="goods-delete">删除选中的商品</em>-->
                 <em class="goods-num">
                     共<span class="sum"></span>件商品，
                     已选择&nbsp;<span class="sum-selected"></span>&nbsp;件

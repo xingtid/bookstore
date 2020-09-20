@@ -11,4 +11,5 @@ public interface BUserMapper {
     BUser selectByPrimaryKey(Integer uId);
     int updateByPrimaryKeySelective(BUser record);
     int updateByPrimaryKey(BUser record);
+    int countUser();
 }

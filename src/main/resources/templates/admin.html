@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>i 星球 Admin</title>
+    <title>后台管理系统</title>
     <link rel="stylesheet" href="/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="/css/style2.css">
@@ -25,11 +25,10 @@
                         <div class="card bg-gradient-danger card-img-holder text-white">
                             <div class="card-body">
                                 <img src="/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-                                <h4 class="font-weight-normal mb-3">最大在线人数
+                                <h4 class="font-weight-normal mb-3">图书总量
                                     <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                                 </h4>
-                                <h2 class="mb-5">15,0000</h2>
-                                <h6 class="card-text">同比增长 60%</h6>
+                                <h2 class="mb-5" th:text="${bookCount}">15,0000</h2>
                             </div>
                         </div>
                     </div>
@@ -37,10 +36,10 @@
                         <div class="card bg-gradient-info card-img-holder text-white">
                             <div class="card-body">
                                 <img src="/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image"/>
-                                <h4 class="font-weight-normal mb-3">总文章数
+                                <h4 class="font-weight-normal mb-3">总订单数
                                     <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                                 </h4>
-                                <h2 class="mb-5">45,6334</h2>
+                                <h2 class="mb-5" th:text="${orderCount}">45,6334</h2>
                                 <h6 class="card-text">同比增长 10%</h6>
                             </div>
                         </div>
@@ -52,7 +51,7 @@
                                 <h4 class="font-weight-normal mb-3">用户总数
                                     <i class="mdi mdi-diamond mdi-24px float-right"></i>
                                 </h4>
-                                <h2 class="mb-5">95,5741</h2>
+                                <h2 class="mb-5" th:text="${countUser}">95,5741</h2>
                                 <h6 class="card-text">同比增长 5%</h6>
                             </div>
                         </div>
@@ -90,7 +89,7 @@
     </div>
 </div>
 <script src="/vendors/js/vendor.bundle.base.js"></script>
-<script src="vendors/js/vendor.bundle.addons.js"></script>
+<script src="/vendors/js/vendor.bundle.addons.js"></script>
 <script src="/js/off-canvas.js"></script>
 <script src="/js/misc.js"></script>
 <script src="/js/dashboard.js"></script>

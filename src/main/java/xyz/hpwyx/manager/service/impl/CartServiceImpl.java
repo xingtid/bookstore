@@ -17,6 +17,12 @@ public class CartServiceImpl implements CartService {
     public int insertCart(BShopCart cart){
         return dao.insertSelective (cart);
     }
+
+    @Override
+    public int delCart(BShopCart cart) {
+        return dao.deleteByPrimaryKey (cart.getcId ());
+    }
+
     public List<CartWithBook> findCartList(BShopCart cart){
         return dao.findCartList (cart);
     }

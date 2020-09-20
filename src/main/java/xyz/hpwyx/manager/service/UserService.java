@@ -8,4 +8,6 @@ public interface UserService {
     BUser findUserByUserName(BUser user);
 
     int register(BUser user);
+
+    int countUser();
 }

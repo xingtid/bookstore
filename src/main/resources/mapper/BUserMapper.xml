@@ -194,4 +194,8 @@
       u_mark = #{uMark,jdbcType=VARCHAR}
     where u_id = #{uId,jdbcType=INTEGER}
   </update>
+  <select id="countUser" resultType="java.lang.Integer" >
+    SELECT count(1)
+    FROM b_user
+  </select>
 </mapper>

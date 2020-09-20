@@ -11,4 +11,6 @@ public interface BookService {
 
     List<BBook> findBookList();
     BBook get(Integer bBook);
+
+    int countBookByType(BBook bBook);
 }

@@ -190,4 +190,8 @@
       o_mark = #{oMark,jdbcType=VARCHAR}
     where o_id = #{oId,jdbcType=INTEGER}
   </update>
+  <select id="countOrder" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM b_order
+  </select>
 </mapper>

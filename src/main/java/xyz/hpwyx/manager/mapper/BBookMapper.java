@@ -17,4 +17,5 @@ public interface BBookMapper {
     List<BBook> findListRandom(BBook record);
     int updateByPrimaryKeySelective(BBook record);
     int updateByPrimaryKey(BBook record);
+    int countBookByType(BBook bBook);
 }

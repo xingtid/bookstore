@@ -55,4 +55,13 @@ public class CartController {
         model.addAttribute ("cartList",cartList);
         return "shopCart";
     }
+    @RequestMapping(value = "delCar/{id}")
+    @ResponseBody
+    public String delCar( @PathVariable Integer id,Model model, HttpServletRequest request) {
+        BShopCart cart = new BShopCart ();
+        cart.setcId (id);
+        //
+        cartService.delCart (cart);
+        return "200";
+    }
 }

@@ -10,4 +10,5 @@ public interface BOrderMapper {
     BOrder selectByPrimaryKey(Integer oId);
     int updateByPrimaryKeySelective(BOrder record);
     int updateByPrimaryKey(BOrder record);
+    int countOrder();
 }

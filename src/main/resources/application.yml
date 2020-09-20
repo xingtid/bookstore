@@ -13,8 +13,6 @@ spring:
     username: root
     password: admin
     driver-class-name: com.mysql.cj.jdbc.Driver
-  freemarker:
-    cache: false    #页面不加载缓存，修改即时生效
 mybatis:
   config-location: classpath:mapper/config/sqlMapConfig.xml
   mapper-locations: classpath:mapper/*Mapper.xml

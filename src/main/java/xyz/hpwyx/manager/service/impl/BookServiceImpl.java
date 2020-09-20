@@ -32,4 +32,9 @@ public class BookServiceImpl implements BookService {
     public BBook get(Integer bId) {
         return dao.selectByPrimaryKey (bId);
     }
+
+    @Override
+    public int countBookByType(BBook bBook) {
+        return dao.countBookByType (bBook);
+    }
 }

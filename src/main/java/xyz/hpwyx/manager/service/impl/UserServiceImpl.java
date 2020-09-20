@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
         dao.insert (user);
         return 1;
     }
+
+    @Override
+    public int countUser() {
+        return dao.countUser ();
+    }
 }

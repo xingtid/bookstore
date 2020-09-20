@@ -1,15 +1,17 @@
 package xyz.hpwyx.manager.controller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import xyz.hpwyx.manager.common.JsonUtils;
+import xyz.hpwyx.manager.common.RedisUtil;
 import xyz.hpwyx.manager.pojo.*;
 import xyz.hpwyx.manager.service.BookService;
 import xyz.hpwyx.manager.service.BookTypeService;
 import xyz.hpwyx.manager.service.impl.CartServiceImpl;
-
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,14 +28,30 @@ public class IndexController {
     private BookService bookService;
     @Autowired
     private CartServiceImpl cartService;
+    @Autowired
+    RedisUtil redisUtil;
 
     @RequestMapping(value = {"/","index.html"})
     public String index(Model model, HttpServletRequest request) {
         List<BBookType> allType = bookTypeService.findAllType ();
         request.getSession ().setAttribute ("typeList", allType);
-        List<BBook> bookList = bookService.findBookList ();
-        model.addAttribute ("bookList",bookList);
         findCart (model, request);
+        try {
+            String json3 = redisUtil.hget ("INDEX", "index_pic1");
+            if (StringUtils.isNotBlank (json3)) {
+                System.out.println ("取出缓存");
+                request.setAttribute ("index_book", JsonUtils.jsonToList (json3, BBook.class));
+            } else {
+                List<BBook> bookList = bookService.findBookList ();
+//                List<XIndex> xResult = indexServiceFigen.showPic ();
+                request.setAttribute ("index_book", "");
+
+                redisUtil.hset ("INDEX", "index_book", JsonUtils.objectToJson (bookList));
+                redisUtil.expire ("INDEX", 20000, 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace ();
+        }
         return "index";
     }
 
