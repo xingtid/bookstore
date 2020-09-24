@@ -56,7 +56,7 @@
                                 <i class="tf-ion-ios-search-strong"></i> 搜索</a>
                             <ul class="dropdown-menu search-dropdown">
                                 <li>
-                                    <form action="post"><input type="search" class="form-control" placeholder="搜索">
+                                    <form method="post" action="/searchBook"><input type="search" name="key" class="form-control" placeholder="搜索">
                                     </form>
                                 </li>
                             </ul>
@@ -75,7 +75,7 @@
                                data-delay="300" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.USERINFO.uName}"><span
                                     class="tf-ion-ios-arrow-down"></span></a>
                             <ul class="dropdown-menu" >
-                                <li><a href="/info">个人信息</a></li>
+                                <li><a href="/getMyUser">个人信息</a></li>
                                 <li><a href="blog-full-width.html">我的订单</a></li>
                                 <li><a href="/loginout">退出登录</a></li>
                             </ul>
@@ -230,7 +230,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/adminType">
+            <a class="nav-link" href="/adminGood">
                 <span class="menu-title">商品</span>
                 <i class="mdi mdi-bookmark menu-icon"></i>
             </a>
@@ -337,3 +337,48 @@
         </ul>
     </div>
 </nav>
+
+<div th:fragment="userleft">
+    <div class="side_bar flt1">
+        <div class="MAvatar">
+            <div class="MAvaImg hasAva">
+                <img src="/images/userhead.jpeg"
+                     height="120" width="120" alt="eyuo"><a  class="MAvaUp" data-toggle="modal" data-target="#avatar-modal"><i class="Mphoto"></i></a></i>
+            </div>
+            <div class="MAvaName"><span th:text="${session.USERINFO.uName}"></span></div>
+            <div class="MAvaInfo clearfix MAvaMyInfo">
+                <span class="MAvaLevel flt1">：<a href="#" target="_blank"><span>无</span></a></span>
+                <span class="MAvaPlace flt1">现居：<span></span></span>
+            </div>
+            <div class="MAvaProfile">
+                <div class="MProfile">
+                    <pre>个人说明</pre>
+                </div>
+            </div>
+            <div class="MAvaMore clearfix">
+                <div class="MAvaNums">
+                    <strong><a href="#" target="_blank">0</a></strong>
+                    <p>收藏总数</p>
+                </div>
+                <div class="MAvaNums">
+                    <strong><a href="#" target="_blank" >0</a></strong>
+                    <p>我的订单数</p>
+                </div>
+                <div class="MAvaNums">
+                    <strong><a href="/getMsg" target="_blank">0</a></strong>
+                    <p>购物车</p>
+                </div>
+            </div>
+
+        </div>
+
+<!--        <div class="MWendaMod">-->
+<!--            <h3>我的文章</h3>-->
+<!--            <ul class="wendaHonor">-->
+<!--                <li >暂无文章</li>-->
+<!--                <li ><a></a></li>-->
+
+<!--            </ul>-->
+<!--        </div>-->
+    </div>
+</div>

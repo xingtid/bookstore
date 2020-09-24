@@ -32,6 +32,7 @@ public class ShiroConfig {
         filterMap.put ("/adminType", "authc");
         filterMap.put ("/shopCart.html", "authc");
         filterMap.put ("/toShopCart", "authc");
+        filterMap.put ("/getMyUser", "authc");
 //        filterMap.put ("/*","authc");
         filterMap.put ("/login", "anon");
 //        filterMap.put ("/add", "perms[user:add]");

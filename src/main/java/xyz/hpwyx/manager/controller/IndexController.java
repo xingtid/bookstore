@@ -36,22 +36,22 @@ public class IndexController {
         List<BBookType> allType = bookTypeService.findAllType ();
         request.getSession ().setAttribute ("typeList", allType);
         findCart (model, request);
-        try {
-            String json3 = redisUtil.hget ("INDEX", "index_pic1");
-            if (StringUtils.isNotBlank (json3)) {
-                System.out.println ("取出缓存");
-                request.setAttribute ("index_book", JsonUtils.jsonToList (json3, BBook.class));
-            } else {
-                List<BBook> bookList = bookService.findBookList ();
-//                List<XIndex> xResult = indexServiceFigen.showPic ();
-                request.setAttribute ("index_book", "");
-
-                redisUtil.hset ("INDEX", "index_book", JsonUtils.objectToJson (bookList));
-                redisUtil.expire ("INDEX", 20000, 0);
-            }
-        } catch (Exception e) {
-            e.printStackTrace ();
-        }
+//        try {
+//            String json3 = redisUtil.hget ("INDEX", "index_pic1");
+//            if (StringUtils.isNotBlank (json3)) {
+//                System.out.println ("取出缓存");
+//                request.setAttribute ("index_book", JsonUtils.jsonToList (json3, BBook.class));
+//            } else {
+//                List<BBook> bookList = bookService.findBookList ();
+////                List<XIndex> xResult = indexServiceFigen.showPic ();
+//                request.setAttribute ("index_book", "");
+//
+//                redisUtil.hset ("INDEX", "index_book", JsonUtils.objectToJson (bookList));
+//                redisUtil.expire ("INDEX", 20000, 0);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace ();
+//        }
         return "index";
     }
 

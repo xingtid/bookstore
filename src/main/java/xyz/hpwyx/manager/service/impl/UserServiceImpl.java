@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService {
     public int countUser() {
         return dao.countUser ();
     }
+
+    @Override
+    public int updateUser(BUser user) {
+        return dao.updateByPrimaryKey (user);
+    }
+
 }

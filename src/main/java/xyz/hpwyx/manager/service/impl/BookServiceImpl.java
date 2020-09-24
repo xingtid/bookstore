@@ -19,8 +19,7 @@ public class BookServiceImpl implements BookService {
     public PageInfo<BBook> findBookByType(BBook bBook) {
         PageHelper.startPage (bBook.getPageNum (),12);
         List<BBook> list = dao.findList (bBook);
-        PageInfo<BBook> pageInfo = new PageInfo<BBook>(list);
-        return pageInfo;
+        return new PageInfo<BBook>(list);
     }
 
     @Override
