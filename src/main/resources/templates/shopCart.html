@@ -80,46 +80,50 @@
                         </td>
                     </tr>
                 </table >
-                <table class="goods-body">
-                    <tr th:each="item:${cartList}">
-                        <td class="goods-col-select">
-                            <a href="javascript:" class="check-label check-product">
-                                <i class="checkbox">
-                                    <span class="check-mark"></span>
+                <form method="post" action="/createOrderDetail" >
+                    <table class="goods-body">
+                        <tr th:each="item:${cartList}">
+
+                            <td class="goods-col-select">
+<!--                                <input type="checkbox" name="id" th:value="${item.id}" style="display: none">-->
+                                <a href="javascript:" class="check-label check-product">
+                                    <i class="checkbox">
+                                        <span class="check-mark"></span>
+                                    </i>
+                                </a>
+                                <a href="javascript:" class="goods-img">
+                                    <img th:src="${item.img}"
+                                         alt="">
+                                </a>
+                                <a href="javascript:" class="goods-info">
+                                    <h4 class="goods-info-title" th:text="${item.name}"></h4>
+                                    <p class="goods-info-tips" th:text="${item.goodTip}"></p>
+                                </a>
+                            </td>
+                            <td class="goods-col-price">
+                                <span th:text="'￥'+${item.singalPrice}"></span>
+                            </td>
+                            <td class="goods-col-volumes">
+                                <div class="num-ctrl-area clearfix">
+                                    <button class="minus">-</button>
+                                    <input type="text" th:value="${item.cCount}" class="input">
+                                    <button class="plus">+</button>
+                                    <em class="hint">限购3件</em>
+                                </div>
+                            </td>
+                            <td class="goods-col-total">
+                                <span></span>
+                            </td>
+                            <td class="goods-col-ctrl">
+                                <span>- -</span>
+                                <i class="del-product" th:data-id = "${item.id}">
+                                    <span class="line-left"></span>
+                                    <span class="line-right"></span>
                                 </i>
-                            </a>
-                            <a href="javascript:" class="goods-img">
-                                <img th:src="${item.img}"
-                                     alt="">
-                            </a>
-                            <a href="javascript:" class="goods-info">
-                                <h4 class="goods-info-title" th:text="${item.name}"></h4>
-                                <p class="goods-info-tips" th:text="${item.goodTip}"></p>
-                            </a>
-                        </td>
-                        <td class="goods-col-price">
-                            <span th:text="'￥'+${item.singalPrice}"></span>
-                        </td>
-                        <td class="goods-col-volumes">
-                            <div class="num-ctrl-area clearfix">
-                                <button class="minus">-</button>
-                                <input type="text" th:value="${item.cCount}" class="input">
-                                <button class="plus">+</button>
-                                <em class="hint">限购3件</em>
-                            </div>
-                        </td>
-                        <td class="goods-col-total">
-                            <span></span>
-                        </td>
-                        <td class="goods-col-ctrl">
-                            <span>- -</span>
-                            <i class="del-product">
-                                <span class="line-left" th:data-id = "${item.id}"></span>
-                                <span class="line-right" th:data-id = "${item.id}"></span>
-                            </i>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </li>
         </ul>
 
@@ -152,7 +156,6 @@
 <script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/cart.js"></script>
-
 </body>
 
 </html>

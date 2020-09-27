@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>订单处理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name=""/>
+    <link rel="stylesheet" href="/css/tasp.css"/>
+    <link href="/css/orderconfirm.css" rel="stylesheet"/>
+    <style>
+        #page {
+            width: auto;
+        }
+
+        #comm-header-inner, #content {
+            width: 950px;
+            margin: auto;
+        }
+        #header .wrap-box {
+            margin-top: -67px;
+        }
+
+        #logo .logo {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 140px;
+            height: 35px;
+            font-size: 35px;
+            line-height: 35px;
+            color: #f40;
+        }
+
+        #logo .logo .i {
+            position: absolute;
+            width: 140px;
+            height: 35px;
+            top: 0;
+            left: 0;
+            background: url(http://a.tbcdn.cn/tbsp/img/header/logo.png);
+        }
+    </style>
+
+</head>
+<body data-spm="1">
+<div id="page">
+    <div id="content" class="grid-c">
+        <form id="J_Form" name="J_Form" action="/auction/order/unity_order_confirm.htm" method="post">
+            <div>
+                <h3 class="dib">确认订单信息</h3>
+                <table cellspacing="0" cellpadding="0" class="order-table" id="J_OrderTable">
+                    <caption style="display: none">统一下单订单信息区域</caption>
+                    <thead>
+                    <tr>
+                        <th class="s-title">店铺宝贝
+                            <hr/>
+                        </th>
+                        <th class="s-price">单价(元)
+                            <hr/>
+                        </th>
+                        <th class="s-amount">数量
+                            <hr/>
+                        </th>
+                        <th class="s-total">小计(元)
+                            <hr/>
+                        </th>
+                    </tr>
+                    </thead>
+
+                    <tbody data-spm="3" class="J_Shop" data-tbcbid="0" >
+                    <tr class="first">
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr class="item"  data-pointRate="0">
+                        <td class="s-title">
+                            <a href="#" target="_blank" title="Huawei/华为 G520新款双卡双待安卓系统智能手机4.5寸四核手手机"
+                               class="J_MakePoint" data-point-url="http://log.mmstat.com/buy.1.5">
+                                <img src="https://img.alicdn.com/bao/uploaded/i3/18670026332876589/T1A4icFbNeXXXXXXXX_!!0-item_pic.jpg_60x60.jpg"
+                                     class="itempic"><span class="title J_MakePoint">Huawei/华为 G520新款双卡双待安卓系统智能手机4.5寸四核手手机</span></a>
+                            <div class="props">
+                                <span>机身颜色: 黑 </span>
+                            </div>
+                        </td>
+                        <td class="s-price">
+   
+  <span class='price '>
+ <em class="style-normal-small-black J_ItemPrice">630.00</em>
+  </span>
+                            <input type="hidden" name="costprice" value="630.00" class="J_CostPrice"/>
+                        </td>
+                        <td class="s-total">
+   <span class='price '>
+ <em class="style-normal-bold-red J_ItemTotal ">630.00</em>
+  </span>
+
+                        </td>
+                    </tr>
+
+                    <tr class="item-service">
+                        <td colspan="5" class="servicearea" style="display: none"></td>
+                    </tr>
+
+                    <tr class="blue-line" style="height: 2px;">
+                        <td colspan="5"></td>
+                    </tr>
+                    <tr class="other other-line">
+                        <td colspan="5">
+                            <ul class="dib-wrap">
+                                <li class="dib extra-info">
+                                    <div class="shoppointarea"></div>
+                                    <div class="farearea">
+                                        <ul class="dib-wrap J_farearea">
+                                            <li class="dib title">运送方式：</li>
+                                            <li class="dib sel">
+                                                <select name="1704508670:2|post" class="J_Fare">
+                                                    <option data-fare="1500" value=" 2 " data-codServiceType="2"
+                                                            data-level="" selected="selected">
+                                                        快递 15.00元
+                                                    </option>
+                                                    <option data-fare="2500" value=" 7 " data-codServiceType="7"
+                                                            data-level="">
+                                                        EMS 25.00元
+                                                    </option>
+                                                    <option data-fare="1500" value=" 1 " data-codServiceType="1"
+                                                            data-level="">
+                                                        平邮 15.00元
+                                                    </option>
+                                                </select>
+                                                <em tabindex="0" class="J_FareFree" style="display: none">免邮费</em>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="extra-area">
+                                        <ul class="dib-wrap">
+                                            <li class="dib title">发货时间：</li>
+                                            <li class="dib content">卖家承诺订单在买家付款后，72小时内<a href="#">发货</a></li>
+                                        </ul>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <tr class="shop-total blue-line">
+                        <td colspan="5">店铺合计(<span class="J_Exclude" style="display: none">不</span>含运费<span
+                                class="J_ServiceText" style="display: none">，服务费</span>)：
+                            <span class='price g_price '>
+ <span>&yen;</span><em class="style-middle-bold-red J_ShopTotal">630.00</em>
+  </span>
+                            <input type="hidden" name="1704508670:2|creditcard" value="false"/>
+                            <input type="hidden" id="J_IsLadderGroup" name="isLadderGroup" value="false"/>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+
+                            <div class="order-go" data-spm="4">
+                                <div class="J_AddressConfirm address-confirm">
+                                    <div class="kd-popup pop-back" style="margin-bottom: 40px;">
+                                        <div class="box">
+                                            <div class="bd">
+                                                <div class="point-in">
+
+                                                    <em class="t">实付款：</em> <span class='price g_price '>
+ <span>&yen;</span><em class="style-large-bold-red" id="J_ActualFee">630.00</em>
+  </span>
+                                                </div>
+
+                                                <ul>
+                                                    <li><em>寄送至:</em><span id="J_AddrConfirm"
+                                                                           style="word-break: break-all;">
+   湖北省 恩施土家族苗族自治州 恩施市 湖北民族学院（信息工程学院）  男生宿舍楼235栋1234202
+   </span></li>
+                                                    <li><em>收货人:</em><span
+                                                            id="J_AddrNameConfirm">某某某 18124317260 </span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <a href="/toShopCart"
+                                           class="back J_MakePoint" target="_top">返回购物车</a>
+                                        <a id="J_Go" class=" btn-go" tabindex="0" >提交订单<b
+                                                class="dpl-button"></b></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

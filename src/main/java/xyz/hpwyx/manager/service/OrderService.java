@@ -5,12 +5,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hpwyx.manager.pojo.BOrder;
+import xyz.hpwyx.manager.pojo.BOrderDetail;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Service
 public interface OrderService {
+    //计算订单数
     int countOrder();
+
+    List<BOrder> getOrderList(BOrder order);
+
+    int insertOrderDetail(BOrderDetail detail);
     /**
      * 根据ID获取订单
      * @param id

@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import xyz.hpwyx.manager.common.AlipayConfig;
+import xyz.hpwyx.manager.mapper.BOrderDetailMapper;
 import xyz.hpwyx.manager.mapper.BOrderMapper;
 import xyz.hpwyx.manager.pojo.BOrder;
+import xyz.hpwyx.manager.pojo.BOrderDetail;
 import xyz.hpwyx.manager.service.OrderService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +24,21 @@ import java.util.*;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private BOrderMapper dao;
+    @Autowired
+    private BOrderDetailMapper orderDetailMapper;
     @Override
     public int countOrder() {
         return dao.countOrder ();
+    }
+
+    @Override
+    public List<BOrder> getOrderList(BOrder order) {
+        return dao.findList (order);
+    }
+
+    @Override
+    public int insertOrderDetail(BOrderDetail detail) {
+        return orderDetailMapper.insertSelective (detail);
     }
 
     @Override

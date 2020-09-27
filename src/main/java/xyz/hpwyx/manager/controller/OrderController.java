@@ -9,25 +9,75 @@ import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.hpwyx.manager.common.AlipayConfig;
 import xyz.hpwyx.manager.common.TokenUtils;
-import xyz.hpwyx.manager.pojo.BUser;
+import xyz.hpwyx.manager.pojo.*;
+import xyz.hpwyx.manager.service.impl.CartServiceImpl;
 import xyz.hpwyx.manager.service.impl.OrderServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
+    @Autowired
+    private CartServiceImpl cartService;
+
+    @RequestMapping("/getMyOrder")
+    public String getMyOrder(Model model, HttpSession session) {
+        BUser userinfo = (BUser) session.getAttribute ("USERINFO");
+        if (userinfo == null) {
+            return "/login";
+        }
+        BOrder order = new BOrder ();
+        order.setoUserId (userinfo.getuId ());
+        List<BOrder> orderList = orderService.getOrderList (order);
+        model.addAttribute ("orderList", order);
+        return "/userOrder";
+    }
+
+    /**
+     * 创建订单
+     */
+    @RequestMapping("/createOrderDetail")
+    public String createOrderDetail(BOrder order, Model model, HttpSession session) {
+        BUser userinfo = (BUser) session.getAttribute ("USERINFO");
+//        List<Integer> id = order.getId ();
+        if (userinfo == null) {
+            return "/login";
+        }
+        BShopCart cart = new BShopCart ();
+        cart.setcUserId (userinfo.getuId ());
+        List<CartWithBook> cartList = cartService.findCartList (cart);
+        List<BOrderDetail> details = new ArrayList<> ();
+        for (CartWithBook cartWithBook : cartList) {
+//            for (Integer integer : id) {
+//                if (cartWithBook.getId () == integer) {
+                    BOrderDetail detail = new BOrderDetail ();
+                    detail.setOdBookId (cartWithBook.getcBookId ());
+                    detail.setOdCount (cartWithBook.getcCount ());
+                    detail.setOdPrice (cartWithBook.getSingalPrice ());
+                    detail.setOdMark (userinfo.getuId ().toString ());
+                    details.add (detail);
+                    orderService.insertOrderDetail(detail);
+                    BShopCart cart1 = new BShopCart ();
+                    cart1.setcId (cartWithBook.getId ());
+                    cartService.delCart (cart1);
+//                }
+//            }
+        }
+        model.addAttribute ("orderDetail",details);
+        return "/orderCommit";
+    }
+
     /**
      * 创建订单
      */
@@ -36,9 +86,9 @@ public class OrderController {
     public String createOrder(@PathVariable double amount, HttpServletResponse response, HttpSession session) throws Exception {
 
         BUser userinfo = (BUser) session.getAttribute ("USERINFO");
-//        if (userinfo == null) {
-//            return "login.html";
-//        }
+        if (userinfo == null) {
+            return "请先登录";
+        }
         AlipayClient alipayClient = new DefaultAlipayClient (AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
         AlipayTradeAppPayModel model = new AlipayTradeAppPayModel ();
 

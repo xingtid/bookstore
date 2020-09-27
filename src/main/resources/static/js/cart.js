@@ -222,7 +222,7 @@
         singalDel: function () {
             var shopCart = this;
             this.delProduct.on("click", function () {
-                id = $(this).attr("data-id")
+                shopCart.id = $(this).attr("data-id")
                 shopCart.judge = "singal";
                 shopCart.curUnitBtn = $(this);
                 shopCart.floatBox.fadeIn(200);

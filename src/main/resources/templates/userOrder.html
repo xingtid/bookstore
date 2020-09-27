@@ -18,7 +18,30 @@
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-
+<style type="text/css">
+    table.gridtable {
+        font-family: verdana,arial,sans-serif;
+        font-size:11px;
+        color: #ffffff;
+        border-width: 1px;
+        border-color: #666666;
+        border-collapse: collapse;
+    }
+    table.gridtable th {
+        border-width: 1px;
+        padding: 10px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ff9d00;
+    }
+    table.gridtable td {
+        border-width: 1px;
+        padding: 10px;
+        border-style: solid;
+        border-color: #666666;
+        background-color: #ffffff;
+    }
+</style>
 <div class="main-top" id="home">
     <div class="header d-md-flex justify-content-between align-items-center py-3 px-xl-5 px-lg-3 px-2" th:replace="head::head"></div>
     <div class="banner_w3lspvt-2" style="background: url(/images/2.jpg) no-repeat center;">
@@ -32,39 +55,30 @@
         <div class="wd-main">
             <div class="wd-navbar clearfix">
                 <ul class="wd-nav _j_qa_nav">
-                    <li class="on"><a href="/getMyUser">我的信息</a></li>
+                    <li><a href="/getMyUser">我的信息</a></li>
                     <li><a href="/getMyCollect">我的收藏</a></li>
-                    <li><a href="/getMyOrder">我的订单</a></li>
+                    <li class="on"><a href="/getMyOrder">我的订单</a></li>
 
                 </ul>
             </div>
-            <form action="/saveUserInfo" method="post" style=" padding: 67px;">
-                <div class="wd-list _j_qa_list">
-                    <div class="form-control-sm" style="padding: 6px;">
-                        <label class="table_info">昵称: </label><input style="height: 25px" type="text" name="uName" th:value="${user.uName}">
-                    </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 地址: </label><input style="height: 25px" type="text" name="uAddress" th:value="${user.uAddress}">
-                    </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 邮箱: </label><input style="height: 25px" type="email" name="uEmail" th:value="${user.uEmail}">
-                    </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 手机号: </label><input style="height: 25px" type="tel" name="uPhone" th:value="${user.uPhone}">
-                    </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 简介: </label><input style="height: 25px" type="text" name="uEducation" th:value="${user.uEducation}">
-                    </div>
-                    <button class="btn btn_id" type="submit">提交</button>
+                <div class="wd-list " style="padding: 20px">
+                    <table class="gridtable">
+                        <tr>
+                            <th>订单编号</th>
+                            <th>订单时间</th>
+                            <th>订单状态</th>
+                        </tr>
+                        <tr th:each="item:${orderList}">
+                            <td th:text="${item.oOrderNo}">Bill</td>
+                            <td th:text="${item.oOrderNo}">Gates</td>
+                            <td th:text="${item.oOrderNo}">Gates</td>
+                        </tr>
+                    </table>
                 </div>
-            </form>
-            <div class="pagin" id="smallpager"></div>
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
-
 </script>
 </body>
 </html>

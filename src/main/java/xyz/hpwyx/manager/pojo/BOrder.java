@@ -2,6 +2,7 @@ package xyz.hpwyx.manager.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class BOrder {
     private Integer oId;
@@ -29,6 +30,7 @@ public class BOrder {
     private String oPic;
 
     private String oMark;
+    private List<Integer> id;
 
     public Integer getoId() {
         return oId;
@@ -132,5 +134,13 @@ public class BOrder {
 
     public void setoMark(String oMark) {
         this.oMark = oMark == null ? null : oMark.trim();
+    }
+
+    public List<Integer> getId() {
+        return id;
+    }
+
+    public void setId(List<Integer> id) {
+        this.id = id;
     }
 }

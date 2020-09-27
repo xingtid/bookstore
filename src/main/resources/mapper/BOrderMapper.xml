@@ -1,197 +1,209 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="xyz.hpwyx.manager.mapper.BOrderMapper" >
-  <resultMap id="BaseResultMap" type="xyz.hpwyx.manager.pojo.BOrder" >
-    <id column="o_id" property="oId" jdbcType="INTEGER" />
-    <result column="o_status" property="oStatus" jdbcType="INTEGER" />
-    <result column="o_user_id" property="oUserId" jdbcType="INTEGER" />
-    <result column="o_start_date" property="oStartDate" jdbcType="DATE" />
-    <result column="o_end_date" property="oEndDate" jdbcType="DATE" />
-    <result column="o_opertor" property="oOpertor" jdbcType="INTEGER" />
-    <result column="o_order_no" property="oOrderNo" jdbcType="VARCHAR" />
-    <result column="o_alipay_no" property="oAlipayNo" jdbcType="VARCHAR" />
-    <result column="o_user_comment" property="oUserComment" jdbcType="VARCHAR" />
-    <result column="o_user_evaluate" property="oUserEvaluate" jdbcType="INTEGER" />
-    <result column="o_amount" property="oAmount" jdbcType="DECIMAL" />
-    <result column="o_pic" property="oPic" jdbcType="VARCHAR" />
-    <result column="o_mark" property="oMark" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    o_id, o_status, o_user_id, o_start_date, o_end_date, o_opertor, o_order_no, o_alipay_no,
+<mapper namespace="xyz.hpwyx.manager.mapper.BOrderMapper">
+    <resultMap id="BaseResultMap" type="xyz.hpwyx.manager.pojo.BOrder">
+        <id column="o_id" property="oId" jdbcType="INTEGER"/>
+        <result column="o_status" property="oStatus" jdbcType="INTEGER"/>
+        <result column="o_user_id" property="oUserId" jdbcType="INTEGER"/>
+        <result column="o_start_date" property="oStartDate" jdbcType="DATE"/>
+        <result column="o_end_date" property="oEndDate" jdbcType="DATE"/>
+        <result column="o_opertor" property="oOpertor" jdbcType="INTEGER"/>
+        <result column="o_order_no" property="oOrderNo" jdbcType="VARCHAR"/>
+        <result column="o_alipay_no" property="oAlipayNo" jdbcType="VARCHAR"/>
+        <result column="o_user_comment" property="oUserComment" jdbcType="VARCHAR"/>
+        <result column="o_user_evaluate" property="oUserEvaluate" jdbcType="INTEGER"/>
+        <result column="o_amount" property="oAmount" jdbcType="DECIMAL"/>
+        <result column="o_pic" property="oPic" jdbcType="VARCHAR"/>
+        <result column="o_mark" property="oMark" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        o_id, o_status, o_user_id, o_start_date, o_end_date, o_opertor, o_order_no, o_alipay_no,
     o_user_comment, o_user_evaluate, o_amount, o_pic, o_mark
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    <include refid="Base_Column_List" />
-    from b_order
-    where o_id = #{oId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from b_order
-    where o_id = #{oId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="xyz.hpwyx.manager.pojo.BOrder" >
-    insert into b_order (o_id, o_status, o_user_id,
-      o_start_date, o_end_date, o_opertor, 
-      o_order_no, o_alipay_no, o_user_comment, 
-      o_user_evaluate, o_amount, o_pic, 
-      o_mark)
-    values (#{oId,jdbcType=INTEGER}, #{oStatus,jdbcType=INTEGER}, #{oUserId,jdbcType=INTEGER}, 
-      #{oStartDate,jdbcType=DATE}, #{oEndDate,jdbcType=DATE}, #{oOpertor,jdbcType=INTEGER}, 
-      #{oOrderNo,jdbcType=VARCHAR}, #{oAlipayNo,jdbcType=VARCHAR}, #{oUserComment,jdbcType=VARCHAR}, 
-      #{oUserEvaluate,jdbcType=INTEGER}, #{oAmount,jdbcType=DECIMAL}, #{oPic,jdbcType=VARCHAR}, 
-      #{oMark,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BOrder" >
-    insert into b_order
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="oId != null" >
-        o_id,
-      </if>
-      <if test="oStatus != null" >
-        o_status,
-      </if>
-      <if test="oUserId != null" >
-        o_user_id,
-      </if>
-      <if test="oStartDate != null" >
-        o_start_date,
-      </if>
-      <if test="oEndDate != null" >
-        o_end_date,
-      </if>
-      <if test="oOpertor != null" >
-        o_opertor,
-      </if>
-      <if test="oOrderNo != null" >
-        o_order_no,
-      </if>
-      <if test="oAlipayNo != null" >
-        o_alipay_no,
-      </if>
-      <if test="oUserComment != null" >
-        o_user_comment,
-      </if>
-      <if test="oUserEvaluate != null" >
-        o_user_evaluate,
-      </if>
-      <if test="oAmount != null" >
-        o_amount,
-      </if>
-      <if test="oPic != null" >
-        o_pic,
-      </if>
-      <if test="oMark != null" >
-        o_mark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="oId != null" >
-        #{oId,jdbcType=INTEGER},
-      </if>
-      <if test="oStatus != null" >
-        #{oStatus,jdbcType=INTEGER},
-      </if>
-      <if test="oUserId != null" >
-        #{oUserId,jdbcType=INTEGER},
-      </if>
-      <if test="oStartDate != null" >
-        #{oStartDate,jdbcType=DATE},
-      </if>
-      <if test="oEndDate != null" >
-        #{oEndDate,jdbcType=DATE},
-      </if>
-      <if test="oOpertor != null" >
-        #{oOpertor,jdbcType=INTEGER},
-      </if>
-      <if test="oOrderNo != null" >
-        #{oOrderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="oAlipayNo != null" >
-        #{oAlipayNo,jdbcType=VARCHAR},
-      </if>
-      <if test="oUserComment != null" >
-        #{oUserComment,jdbcType=VARCHAR},
-      </if>
-      <if test="oUserEvaluate != null" >
-        #{oUserEvaluate,jdbcType=INTEGER},
-      </if>
-      <if test="oAmount != null" >
-        #{oAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="oPic != null" >
-        #{oPic,jdbcType=VARCHAR},
-      </if>
-      <if test="oMark != null" >
-        #{oMark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="xyz.hpwyx.manager.pojo.BOrder" >
-    <!--
-      WARNING - @mbggenerated
-      This element is automatically generated by MyBatis Generator, do not modify.
-      This element was generated on Fri Sep 04 21:35:05 CST 2020.
-    -->
-    update b_order
-    <set >
-      <if test="oStatus != null" >
-        o_status = #{oStatus,jdbcType=INTEGER},
-      </if>
-      <if test="oUserId != null" >
-        o_user_id = #{oUserId,jdbcType=INTEGER},
-      </if>
-      <if test="oStartDate != null" >
-        o_start_date = #{oStartDate,jdbcType=DATE},
-      </if>
-      <if test="oEndDate != null" >
-        o_end_date = #{oEndDate,jdbcType=DATE},
-      </if>
-      <if test="oOpertor != null" >
-        o_opertor = #{oOpertor,jdbcType=INTEGER},
-      </if>
-      <if test="oOrderNo != null" >
-        o_order_no = #{oOrderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="oAlipayNo != null" >
-        o_alipay_no = #{oAlipayNo,jdbcType=VARCHAR},
-      </if>
-      <if test="oUserComment != null" >
-        o_user_comment = #{oUserComment,jdbcType=VARCHAR},
-      </if>
-      <if test="oUserEvaluate != null" >
-        o_user_evaluate = #{oUserEvaluate,jdbcType=INTEGER},
-      </if>
-      <if test="oAmount != null" >
-        o_amount = #{oAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="oPic != null" >
-        o_pic = #{oPic,jdbcType=VARCHAR},
-      </if>
-      <if test="oMark != null" >
-        o_mark = #{oMark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where o_id = #{oId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="xyz.hpwyx.manager.pojo.BOrder" >
-    update b_order
-    set o_status = #{oStatus,jdbcType=INTEGER},
-      o_user_id = #{oUserId,jdbcType=INTEGER},
-      o_start_date = #{oStartDate,jdbcType=DATE},
-      o_end_date = #{oEndDate,jdbcType=DATE},
-      o_opertor = #{oOpertor,jdbcType=INTEGER},
-      o_order_no = #{oOrderNo,jdbcType=VARCHAR},
-      o_alipay_no = #{oAlipayNo,jdbcType=VARCHAR},
-      o_user_comment = #{oUserComment,jdbcType=VARCHAR},
-      o_user_evaluate = #{oUserEvaluate,jdbcType=INTEGER},
-      o_amount = #{oAmount,jdbcType=DECIMAL},
-      o_pic = #{oPic,jdbcType=VARCHAR},
-      o_mark = #{oMark,jdbcType=VARCHAR}
-    where o_id = #{oId,jdbcType=INTEGER}
-  </update>
-  <select id="countOrder" resultType="java.lang.Integer">
-    SELECT count(1)
-    FROM b_order
-  </select>
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from b_order
+        where o_id = #{oId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete
+        from b_order
+        where o_id = #{oId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="xyz.hpwyx.manager.pojo.BOrder">
+        insert into b_order (o_id, o_status, o_user_id,
+                             o_start_date, o_end_date, o_opertor,
+                             o_order_no, o_alipay_no, o_user_comment,
+                             o_user_evaluate, o_amount, o_pic,
+                             o_mark)
+        values (#{oId,jdbcType=INTEGER}, #{oStatus,jdbcType=INTEGER}, #{oUserId,jdbcType=INTEGER},
+                #{oStartDate,jdbcType=DATE}, #{oEndDate,jdbcType=DATE}, #{oOpertor,jdbcType=INTEGER},
+                #{oOrderNo,jdbcType=VARCHAR}, #{oAlipayNo,jdbcType=VARCHAR}, #{oUserComment,jdbcType=VARCHAR},
+                #{oUserEvaluate,jdbcType=INTEGER}, #{oAmount,jdbcType=DECIMAL}, #{oPic,jdbcType=VARCHAR},
+                #{oMark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BOrder">
+        insert into b_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="oId != null">
+                o_id,
+            </if>
+            <if test="oStatus != null">
+                o_status,
+            </if>
+            <if test="oUserId != null">
+                o_user_id,
+            </if>
+            <if test="oStartDate != null">
+                o_start_date,
+            </if>
+            <if test="oEndDate != null">
+                o_end_date,
+            </if>
+            <if test="oOpertor != null">
+                o_opertor,
+            </if>
+            <if test="oOrderNo != null">
+                o_order_no,
+            </if>
+            <if test="oAlipayNo != null">
+                o_alipay_no,
+            </if>
+            <if test="oUserComment != null">
+                o_user_comment,
+            </if>
+            <if test="oUserEvaluate != null">
+                o_user_evaluate,
+            </if>
+            <if test="oAmount != null">
+                o_amount,
+            </if>
+            <if test="oPic != null">
+                o_pic,
+            </if>
+            <if test="oMark != null">
+                o_mark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="oId != null">
+                #{oId,jdbcType=INTEGER},
+            </if>
+            <if test="oStatus != null">
+                #{oStatus,jdbcType=INTEGER},
+            </if>
+            <if test="oUserId != null">
+                #{oUserId,jdbcType=INTEGER},
+            </if>
+            <if test="oStartDate != null">
+                #{oStartDate,jdbcType=DATE},
+            </if>
+            <if test="oEndDate != null">
+                #{oEndDate,jdbcType=DATE},
+            </if>
+            <if test="oOpertor != null">
+                #{oOpertor,jdbcType=INTEGER},
+            </if>
+            <if test="oOrderNo != null">
+                #{oOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="oAlipayNo != null">
+                #{oAlipayNo,jdbcType=VARCHAR},
+            </if>
+            <if test="oUserComment != null">
+                #{oUserComment,jdbcType=VARCHAR},
+            </if>
+            <if test="oUserEvaluate != null">
+                #{oUserEvaluate,jdbcType=INTEGER},
+            </if>
+            <if test="oAmount != null">
+                #{oAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="oPic != null">
+                #{oPic,jdbcType=VARCHAR},
+            </if>
+            <if test="oMark != null">
+                #{oMark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="xyz.hpwyx.manager.pojo.BOrder">
+        <!--
+          WARNING - @mbggenerated
+          This element is automatically generated by MyBatis Generator, do not modify.
+          This element was generated on Fri Sep 04 21:35:05 CST 2020.
+        -->
+        update b_order
+        <set>
+            <if test="oStatus != null">
+                o_status = #{oStatus,jdbcType=INTEGER},
+            </if>
+            <if test="oUserId != null">
+                o_user_id = #{oUserId,jdbcType=INTEGER},
+            </if>
+            <if test="oStartDate != null">
+                o_start_date = #{oStartDate,jdbcType=DATE},
+            </if>
+            <if test="oEndDate != null">
+                o_end_date = #{oEndDate,jdbcType=DATE},
+            </if>
+            <if test="oOpertor != null">
+                o_opertor = #{oOpertor,jdbcType=INTEGER},
+            </if>
+            <if test="oOrderNo != null">
+                o_order_no = #{oOrderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="oAlipayNo != null">
+                o_alipay_no = #{oAlipayNo,jdbcType=VARCHAR},
+            </if>
+            <if test="oUserComment != null">
+                o_user_comment = #{oUserComment,jdbcType=VARCHAR},
+            </if>
+            <if test="oUserEvaluate != null">
+                o_user_evaluate = #{oUserEvaluate,jdbcType=INTEGER},
+            </if>
+            <if test="oAmount != null">
+                o_amount = #{oAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="oPic != null">
+                o_pic = #{oPic,jdbcType=VARCHAR},
+            </if>
+            <if test="oMark != null">
+                o_mark = #{oMark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where o_id = #{oId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="xyz.hpwyx.manager.pojo.BOrder">
+        update b_order
+        set o_status        = #{oStatus,jdbcType=INTEGER},
+            o_user_id       = #{oUserId,jdbcType=INTEGER},
+            o_start_date    = #{oStartDate,jdbcType=DATE},
+            o_end_date      = #{oEndDate,jdbcType=DATE},
+            o_opertor       = #{oOpertor,jdbcType=INTEGER},
+            o_order_no      = #{oOrderNo,jdbcType=VARCHAR},
+            o_alipay_no     = #{oAlipayNo,jdbcType=VARCHAR},
+            o_user_comment  = #{oUserComment,jdbcType=VARCHAR},
+            o_user_evaluate = #{oUserEvaluate,jdbcType=INTEGER},
+            o_amount        = #{oAmount,jdbcType=DECIMAL},
+            o_pic           = #{oPic,jdbcType=VARCHAR},
+            o_mark          = #{oMark,jdbcType=VARCHAR}
+        where o_id = #{oId,jdbcType=INTEGER}
+    </update>
+    <select id="countOrder" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM b_order
+    </select>
+    <select id="findList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM b_order
+        <where>
+            <if test="oUserId != null">
+                o_user_id = #{oUserId,jdbcType=INTEGER}
+            </if>
+        </where>
+        ORDER BY o_start_date
+    </select>
 </mapper>
