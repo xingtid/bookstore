@@ -39,6 +39,15 @@
                                     </div>
 <!--                                    <a href="javascript:" onclick="delCart" class="remove"><i class="tf-ion-close"></i></a>-->
                                 </div>
+                                <div class="media" th:if="${#lists.isEmpty(session.cartList)}">
+                                    <a class="pull-left" href="#">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading"><a href="" >购物车暂无商品</a></h4>
+                                        <h5><strong ></strong></h5>
+                                    </div>
+<!--                                    <a href="javascript:" onclick="delCart" class="remove"><i class="tf-ion-close"></i></a>-->
+                                </div>
 
                                 <div class="cart-summary">
                                     <span>合计</span>

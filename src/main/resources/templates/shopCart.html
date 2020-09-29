@@ -80,7 +80,6 @@
                         </td>
                     </tr>
                 </table >
-                <form method="post" action="/createOrderDetail" >
                     <table class="goods-body">
                         <tr th:each="item:${cartList}">
 
@@ -105,9 +104,9 @@
                             </td>
                             <td class="goods-col-volumes">
                                 <div class="num-ctrl-area clearfix">
-                                    <button class="minus">-</button>
+                                    <button class="minus" th:data-id = "${item.id}">-</button>
                                     <input type="text" th:value="${item.cCount}" class="input">
-                                    <button class="plus">+</button>
+                                    <button class="plus" th:data-id = "${item.id}">+</button>
                                     <em class="hint">限购3件</em>
                                 </div>
                             </td>
@@ -123,7 +122,6 @@
                             </td>
                         </tr>
                     </table>
-                </form>
             </li>
         </ul>
 
@@ -135,7 +133,7 @@
                     <i class="checkbox">
                         <span class="check-mark"></span>
                     </i>
-                    <em class="check-name">全选</em>
+<!--                    <em class="check-name">全选</em>-->
                 </a>
 <!--                <em class="goods-delete">删除选中的商品</em>-->
                 <em class="goods-num">
@@ -148,7 +146,7 @@
                     合计(不含运费)：
                     <span class="bill-price"></span>
                 </em>
-                <a href="javascript:" class="order-btn ban-order">去结算</a>
+                <a href="/createOrderDetail" class="order-btn ban-order">去结算</a>
             </div>
         </div>
     </div>

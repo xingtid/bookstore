@@ -64,4 +64,16 @@ public class CartController {
         cartService.delCart (cart);
         return "200";
     }
+    @RequestMapping(value = "addNum/{id}/{num}")
+    @ResponseBody
+    public String addNum( @PathVariable Integer id,@PathVariable Integer num,Model model, HttpServletRequest request) {
+        BShopCart cart = new BShopCart ();
+        cart.setcId (id);
+        BShopCart cart1 = cartService.getCart (cart);
+        cart1.setcId (id);
+        cart1.setcCount (cart1.getcCount ()+num);
+        //更新数量
+        cartService.updateCarNum (cart1);
+        return "200";
+    }
 }

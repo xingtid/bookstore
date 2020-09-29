@@ -150,11 +150,17 @@
             var shopCart = this;
             shopCart.plus.on("click", function () {
                 var $this = $(this);
+                shopCart.id = $(this).attr("data-id")
                 var value = parseInt($this.prev().val());
                 value++;
                 if (value > 10) {
                     return;
                 };
+                $.get("/addNum/"+shopCart.id+"/"+"1",  function (data) {
+                    if (data.resultCode === 200) {
+                    } else {
+                    }
+                });
                 shopCart.buttonCss($this.parent().find(shopCart.button), value);
                 $this.prev().val(value);
                 shopCart.calcInfo();
@@ -163,11 +169,18 @@
             /*减号按钮*/
             shopCart.minus.on("click", function () {
                 var $this = $(this);
+                shopCart.id = $(this).attr("data-id")
                 var value = parseInt($this.next().val());
                 value--;
                 if (value < 1) {
                     return;
                 }
+                $.get("/addNum/"+shopCart.id+"/"+"-1",  function (data) {
+                    if (data.resultCode === 200) {
+                    } else {
+                    }
+                });
+
                 shopCart.buttonCss($this.parent().find(shopCart.button), value);
                 $this.next().val(value);
                 shopCart.calcInfo();

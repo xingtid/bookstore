@@ -46,7 +46,21 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
+    @Override
+    public int insertOrder(BOrder order) {
+        dao.insertSelective (order);
+        return 1;
+    }
 
+
+    /**
+     * 创建支付宝订单
+     * @param orderNo: 订单编号
+     * @param amount:  实际支付金额
+     * @param body:    订单描述
+     * @return
+     * @throws AlipayApiException
+     */
     @Override
     public String createOrder(@RequestParam("orderNo") String orderNo, @RequestParam("amount") double amount, @RequestParam("body") String body) throws AlipayApiException {
         //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
@@ -75,13 +89,11 @@ public class OrderServiceImpl implements OrderService {
             // 支付成功，根据业务逻辑修改相应数据的状态
             System.out.println ("orderNo" + orderNo);
             System.out.println ("tradeNo" + tradeNo);
-//            BOrder payById = dao.selectByPrimaryKey (orderNo);
-            BOrder payById = dao.selectByPrimaryKey (1);
-//            payById.setoPlatformorderid (tradeNo);
-            payById.setoStatus (1);
-            dao.updateByPrimaryKey (payById);
-
-
+            //更改状态为支付
+            BOrder order = dao.selectByOrderNo (orderNo);
+            order.setoStatus (2);
+            order.setoAlipayNo (tradeNo);
+            dao.updateByPrimaryKey (order);
             return true;
         }
         System.out.println ("支付失败notify");

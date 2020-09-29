@@ -43,6 +43,18 @@ public class BOrder {
     public Integer getoStatus() {
         return oStatus;
     }
+    public String getoStatusStr() {
+        switch (oStatus){
+            case 1:
+                return "待支付";
+            case 2:
+                return "已支付";
+            case 3:
+                return "待发货";
+            default:
+                return "";
+        }
+    }
 
     public void setoStatus(Integer oStatus) {
         this.oStatus = oStatus;

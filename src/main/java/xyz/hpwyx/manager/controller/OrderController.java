@@ -22,6 +22,7 @@ import xyz.hpwyx.manager.service.impl.OrderServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.*;
 
 @Controller
@@ -40,7 +41,7 @@ public class OrderController {
         BOrder order = new BOrder ();
         order.setoUserId (userinfo.getuId ());
         List<BOrder> orderList = orderService.getOrderList (order);
-        model.addAttribute ("orderList", order);
+        model.addAttribute ("orderList", orderList);
         return "/userOrder";
     }
 
@@ -58,32 +59,42 @@ public class OrderController {
         cart.setcUserId (userinfo.getuId ());
         List<CartWithBook> cartList = cartService.findCartList (cart);
         List<BOrderDetail> details = new ArrayList<> ();
+        //创建订单明细
+        BigDecimal totalPrice = new BigDecimal (0);
         for (CartWithBook cartWithBook : cartList) {
-//            for (Integer integer : id) {
-//                if (cartWithBook.getId () == integer) {
-                    BOrderDetail detail = new BOrderDetail ();
-                    detail.setOdBookId (cartWithBook.getcBookId ());
-                    detail.setOdCount (cartWithBook.getcCount ());
-                    detail.setOdPrice (cartWithBook.getSingalPrice ());
-                    detail.setOdMark (userinfo.getuId ().toString ());
-                    details.add (detail);
-                    orderService.insertOrderDetail(detail);
-                    BShopCart cart1 = new BShopCart ();
-                    cart1.setcId (cartWithBook.getId ());
-                    cartService.delCart (cart1);
-//                }
-//            }
+            BOrderDetail detail = new BOrderDetail ();
+            detail.setOdBookId (cartWithBook.getcBookId ());
+            detail.setOdCount (cartWithBook.getcCount ());
+            detail.setOdPrice (cartWithBook.getSingalPrice ());
+            detail.setOdMark (userinfo.getuId ().toString ());
+            details.add (detail);
+            orderService.insertOrderDetail(detail);
+            BShopCart cart1 = new BShopCart ();
+            cart1.setcId (cartWithBook.getId ());
+            cartService.delCart (cart1);
+            //循环每件商品 计算总价
+            BigDecimal multiply = new BigDecimal (cartWithBook.getcCount ()).multiply (cartWithBook.getSingalPrice ());
+            totalPrice = totalPrice.add (multiply);
         }
-        model.addAttribute ("orderDetail",details);
+        //创建订单
+        BOrder order2 = new BOrder ();
+        order2.setoUserId (userinfo.getuId ());
+        order2.setoAmount (totalPrice);
+        order2.setoOrderNo (TokenUtils.getPayToken ());
+        order2.setoStartDate (new Date ());
+        order2.setoStatus (1);
+        orderService.insertOrder (order2);
+        model.addAttribute ("order",order2);
+        model.addAttribute ("orderDetail",cartList);
         return "/orderCommit";
     }
 
     /**
      * 创建订单
      */
-    @RequestMapping("/createOrder/{amount}")
+    @RequestMapping("/createOrder/{amount}/{orderNo}")
     @ResponseBody
-    public String createOrder(@PathVariable double amount, HttpServletResponse response, HttpSession session) throws Exception {
+    public String createOrder(@PathVariable double amount,@PathVariable String orderNo, HttpServletResponse response, HttpSession session) throws Exception {
 
         BUser userinfo = (BUser) session.getAttribute ("USERINFO");
         if (userinfo == null) {
@@ -99,16 +110,8 @@ public class OrderController {
         ali_request.setNotifyUrl (AlipayConfig.notify_url);
         //就是orderString 可以直接给客户端请求，无需再做处理。
 
-        String orderNo = TokenUtils.getPayToken ();
-//        XPay pay = new XPay ();
-//        pay.setoState (0);
-//        pay.setoDate (new Date ());
-//        pay.setoId (orderNo);
-//        pay.setoPrice (amount);
-//        pay.setoTypeid (3);
-//        pay.setoUserid (userinfo.getUId ());
+
         System.out.println ("no:" + orderNo);
-//        vipServiceFigen.addPay (pay);
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest ();
         alipayRequest.setReturnUrl (AlipayConfig.return_url); //同步通知url
         alipayRequest.setNotifyUrl (AlipayConfig.notify_url);//异步通知url

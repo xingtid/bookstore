@@ -26,6 +26,9 @@ public interface OrderService {
     @RequestMapping("/getPayById")
     BOrder getPayById(@RequestParam("id") String id);
 
+
+    int insertOrder(BOrder order);
+
     /**
      * @param orderNo: 订单编号
      * @param amount:  实际支付金额

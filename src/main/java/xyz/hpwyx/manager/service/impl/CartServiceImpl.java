@@ -23,9 +23,18 @@ public class CartServiceImpl implements CartService {
         return dao.deleteByPrimaryKey (cart.getcId ());
     }
 
+    @Override
+    public int updateCarNum(BShopCart cart) {
+        return dao.updateByPrimaryKeySelective (cart);
+    }
+
     public List<CartWithBook> findCartList(BShopCart cart){
         return dao.findCartList (cart);
     }
+    public BShopCart getCart(BShopCart cart){
+        return dao.selectByPrimaryKey (cart.getcId ());
+    }
+
 
 
 }
