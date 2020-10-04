@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>订单管理</title>
+    <link rel="stylesheet" href="/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/node_modules/jqvmap/dist/jqvmap.min.css"/>
+    <link rel="stylesheet" href="/css/style2.css">
+    <link rel="shortcut icon" href="/images/favicon.png"/>
+</head>
+<body>
+<div class="container-scroller">
+    <div th:replace="head::adminHead"></div>
+    <div class="container-fluid page-body-wrapper">
+        <div th:replace="head::adminLeft"></div>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title" style="margin-right: 14%">订单管理
+                                </div>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <!-- 表头  -->
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>订单号</th>
+                                        <th>订单时间</th>
+                                        <th>用户</th>
+                                        <th>总价</th>
+                                        <th>评论</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <!-- 循环 -->
+                                    <tr th:each="a: ${orderList}">
+                                        <td th:text="${a.bId}">1</td>
+                                        <td th:text="${a.bName}">推荐</td>
+                                        <td th:text="${a.typeName}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.bPrice}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.bBeSales}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.bIntroduce}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <button type="button" class="btn btn-gradient-danger btn-sm"
+                                                data-toggle="modal"
+                                                data-target="#deleteSource" th:id="${a.bId}"
+                                                onclick="deletea(this)">发货
+                                        </button>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="deleteSource" role="dialog"
+                     aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">确定已发货！</div>
+                            </div>
+                            <form action="/delGood" method="post">
+                                <input type="hidden" id="dele" name="bId" value="">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-xs btn-white"
+                                            data-dismiss="modal">取 消
+                                    </button>
+                                    <button type="submit" class="btn btn-xs btn-danger">确定</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/vendors/js/vendor.bundle.base.js"></script>
+<script src="/vendors/js/vendor.bundle.addons.js"></script>
+<script src="/js/off-canvas.js"></script>
+<script src="/js/misc.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

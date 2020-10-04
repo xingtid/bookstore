@@ -27,9 +27,7 @@
                                             data-target="#addSource">添加
                                     </button>
                                 </div>
-
                                 <div>
-
                                 </div>
                                 <table class="table table-hover">
                                     <thead>
@@ -49,24 +47,28 @@
                                     <tbody>
                                     <!-- 循环 -->
                                     <tr th:each="a: ${goodList}">
-                                        <td th:text="${a.gId}">1</td>
-                                        <td th:text="${a.gName}">推荐</td>
-                                        <td th:text="${a.tCount}" class="text-danger"> 12461 <i
+                                        <td th:text="${a.bId}">1</td>
+                                        <td th:text="${a.bName}">推荐</td>
+                                        <td th:text="${a.typeName}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
-                                        <td th:text="${a.tMark}" class="text-danger"> 12461 <i
+                                        <td th:text="${a.bPrice}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
-                                        <td th:text="${a.tUrl}" class="text-danger"> 12461 <i
+                                        <td th:text="${a.bBeSales}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.bIntroduce}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.bMark}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:text="${a.bPic}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
                                         <td>
-                                            <button type="button" class="btn btn-gradient-primary btn-sm"
-                                                    data-toggle="modal" data-target="#changeSource"
-                                                    th:id="${a.tId}"
-                                                    th:data-name="${a.tName}"
-                                                    th:data-mark="${a.tMark}" onclick="updateType(this)">更改
-                                            </button>
+<!--                                            <button type="button" class="btn btn-gradient-primary btn-sm"-->
+<!--                                                    data-toggle="modal" data-target="#changeSource"-->
+<!--                                                    th:id="${a.bId}"onclick="updateType(this)">更改-->
+<!--                                            </button>-->
                                             <button type="button" class="btn btn-gradient-danger btn-sm"
                                                     data-toggle="modal"
-                                                    data-target="#deleteSource" th:id="${a.tId}"
+                                                    data-target="#deleteSource" th:id="${a.bId}"
                                                     onclick="deletea(this)">删除
                                             </button>
                                         </td>
@@ -89,10 +91,10 @@
 
                             </div>
                             <div class="modal-body">
-                                <div class="container-fluid">确定要删除该？删除后不可恢复！</div>
+                                <div class="container-fluid">确定要删除该商品？删除后不可恢复！</div>
                             </div>
-                            <form action="/delType" method="post">
-                                <input type="hidden" id="dele" name="tId" value="">
+                            <form action="/delGood" method="post">
+                                <input type="hidden" id="dele" name="bId" value="">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-xs btn-white"
                                             data-dismiss="modal">取 消
@@ -124,7 +126,7 @@
                                         <div class="form-group ">
                                             <div class="col-xs-8 ">
                                                 <input type="hidden" class="form-control input-sm duiqi"
-                                                       name="tId" id="rsup">
+                                                       name="bId" id="rsup">
                                             </div>
                                         </div>
                                         <div class="form-group ">
@@ -135,7 +137,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group ">
-                                            <label for="uu_name" class="col-xs-3 control-label">备注：</label>
+                                            <label for="uu_name" class="col-xs-3 control-label">简介：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
                                                        id="uu_mark" name="tMark">
@@ -162,7 +164,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="gridSystemModalLabel">添加信息</h4>
+                                <h4 class="modal-title" id="gridSystemModalLabel">添加商品</h4>
                                 <button type="button" class="close" data-dismiss="modal"
                                         aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -172,26 +174,55 @@
 
                             <div class="modal-body">
                                 <div class="container-fluid">
-                                    <form class="form-horizontal" action="/addType"
+                                    <form class="form-horizontal" action="/addGood"
                                           method="post">
                                         <div class="form-group ">
                                             <div class="col-xs-8 ">
                                                 <input type="hidden" class="form-control input-sm duiqi"
-                                                       name="u_id" value="" id="rsup">
+                                                       name="bId">
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label for="uu_name" class="col-xs-3 control-label">名称：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
-                                                       id="uu_name" name="tName" >
+                                                       name="bName" >
                                             </div>
                                         </div>
                                         <div class="form-group ">
-                                            <label for="uu_name" class="col-xs-3 control-label">备注：</label>
+                                            <label for="uu_name" class="col-xs-3 control-label">作者：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
-                                                       id="uu_name" name="tMark" >
+                                                       name="bAnthor" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">类别：</label>
+                                            <div class="col-xs-8 ">
+                                                <select name="bTypeId">
+                                                    <option th:each="type:${typeList}" th:value="${type.tId}" th:text="${type.tName}" name="bTypeId"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">价格：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi"
+                                                      name="bPrice" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">图片：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi"
+                                                        name="bPic" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="uu_name" class="col-xs-3 control-label">简介：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="text" class="form-control input-sm duiqi"
+                                                        name="bIntroduce" >
                                             </div>
                                         </div>
                                         <div class="modal-footer">

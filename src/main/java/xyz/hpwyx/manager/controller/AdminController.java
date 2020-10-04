@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.hpwyx.manager.pojo.BBook;
 import xyz.hpwyx.manager.pojo.BBookType;
+import xyz.hpwyx.manager.pojo.BUser;
 import xyz.hpwyx.manager.service.impl.BookServiceImpl;
 import xyz.hpwyx.manager.service.impl.BookTypeServiceImpl;
 import xyz.hpwyx.manager.service.impl.OrderServiceImpl;
@@ -41,11 +42,23 @@ public class AdminController {
         model.addAttribute ("typeList",allType);
         return "typeadmin";
     }
+    @RequestMapping(value = "adminUser")
+    public String adminUser(BUser user, Model model, HttpServletRequest request) {
+        List<BUser> list = userService.findList (user);
+        model.addAttribute ("userList",list);
+        return "useradmin";
+    }
     @RequestMapping(value = "adminGood")
     public String adminGood(Model model, HttpServletRequest request) {
-        List<BBook> bookList = bookService.findBookList ();
+        List<BBook> bookList = bookService.findList ();
         model.addAttribute ("goodList",bookList);
+        List<BBookType> allType = bookTypeService.findAllType ();
+        model.addAttribute ("typeList",allType);
+        return "goodadmin";
+    }
+    @RequestMapping(value = "adminSearch")
+    public String adminSearch(String name, Model model, HttpServletRequest request) {
+
         return "typeadmin";
     }
-
 }

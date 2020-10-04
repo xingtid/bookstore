@@ -13,4 +13,8 @@ public interface BookService {
     BBook get(Integer bBook);
 
     int countBookByType(BBook bBook);
+
+    int addGood(BBook book);
+    int delGood(BBook book);
+    int updateGood(BBook book);
 }

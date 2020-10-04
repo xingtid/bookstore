@@ -88,13 +88,6 @@
                             <input id="product-quantity" type="text" value="1" name="product-quantity">
                         </div>
                     </div>
-<!--                    <div class="product-category">-->
-<!--                        <span>Categories:</span>-->
-<!--                        <ul>-->
-<!--                            <li><a href="#">Products</a></li>-->
-<!--                            <li><a href="#">Soap</a></li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
                     <input type="hidden" th:value="${book.bId}" id="bookId">
                     <a href="#" class="btn btn-main mt-20" style="font-size: 18px" onclick="addCart()">添加到购物车</a>
                 </div>
@@ -325,8 +318,6 @@
                     alert("添加成功")
                 } else {
                     alert(data.msg)
-                    // $("#msg").text(data.msg)
-                    // $("#pacheck").show();
                 }
             });
         }

@@ -6,6 +6,8 @@ import xyz.hpwyx.manager.mapper.BUserMapper;
 import xyz.hpwyx.manager.pojo.BUser;
 import xyz.hpwyx.manager.service.UserService;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -35,4 +37,7 @@ public class UserServiceImpl implements UserService {
         return dao.updateByPrimaryKey (user);
     }
 
+    public List<BUser> findList(BUser user){
+        return dao.findList (user);
+    }
 }

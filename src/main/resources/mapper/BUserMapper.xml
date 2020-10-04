@@ -198,4 +198,14 @@
     SELECT count(1)
     FROM b_user
   </select>
+  <select id="findList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from b_user
+    <where>
+      <if test="uName != null">
+        u_name = #{uName,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

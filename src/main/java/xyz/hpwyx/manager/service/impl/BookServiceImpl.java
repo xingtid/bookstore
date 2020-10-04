@@ -1,6 +1,5 @@
 package xyz.hpwyx.manager.service.impl;
 
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,9 @@ public class BookServiceImpl implements BookService {
     public List<BBook> findBookList() {
         return dao.findListRandom (new BBook ());
     }
+    public List<BBook> findList() {
+        return dao.findList (new BBook ());
+    }
 
     @Override
     public BBook get(Integer bId) {
@@ -35,5 +37,25 @@ public class BookServiceImpl implements BookService {
     @Override
     public int countBookByType(BBook bBook) {
         return dao.countBookByType (bBook);
+    }
+
+    @Override
+    public int addGood(BBook book) {
+        book.setbBeSales (0);
+        book.setbDiscount (0);
+        book.setbIsNew (0);
+        book.setbPress ("1");
+        book.setbIsSole (1);
+        return dao.insert (book);
+    }
+
+    @Override
+    public int delGood(BBook book) {
+        return dao.deleteByPrimaryKey (book.getbId ());
+    }
+
+    @Override
+    public int updateGood(BBook book) {
+        return dao.updateByPrimaryKeySelective (book);
     }
 }
