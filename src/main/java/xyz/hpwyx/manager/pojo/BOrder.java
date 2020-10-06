@@ -43,7 +43,7 @@ public class BOrder {
     public Integer getoStatus() {
         return oStatus;
     }
-    public String getoStatusStr() {
+    public String getStatusStr() {
         switch (oStatus){
             case 1:
                 return "待支付";

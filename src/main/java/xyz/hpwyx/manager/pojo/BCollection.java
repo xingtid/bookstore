@@ -13,6 +13,8 @@ public class BCollection {
 
     private String cMark;
 
+
+
     public Integer getcId() {
         return cId;
     }

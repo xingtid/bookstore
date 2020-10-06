@@ -20,7 +20,8 @@
 <body>
 
 <div class="main-top" id="home">
-    <div class="header d-md-flex justify-content-between align-items-center py-3 px-xl-5 px-lg-3 px-2" th:replace="head::head"></div>
+    <div class="header d-md-flex justify-content-between align-items-center py-3 px-xl-5 px-lg-3 px-2"
+         th:replace="head::head"></div>
     <div class="banner_w3lspvt-2" style="background: url(/images/2.jpg) no-repeat center;">
 
     </div>
@@ -32,35 +33,29 @@
         <div class="wd-main">
             <div class="wd-navbar clearfix">
                 <ul class="wd-nav _j_qa_nav">
-                    <li class="on"><a href="/getMyUser">我的信息</a></li>
-                    <li><a href="/getMyCollect">我的收藏</a></li>
+                    <li><a href="/getMyUser">我的信息</a></li>
+                    <li class="on"><a href="/getMyCollection">我的收藏</a></li>
                     <li><a href="/getMyOrder">我的订单</a></li>
 
                 </ul>
             </div>
-            <form action="/saveUserInfo" method="post" style=" padding: 67px;">
-                <div class="wd-list _j_qa_list">
-                    <div class="form-control-sm" style="padding: 6px;">
-                        <label class="table_info">昵称: </label><input style="height: 25px" type="text" name="uName" th:value="${user.uName}">
+            <div class="wd-list " style="padding: 20px">
+                <div class="row">
+                    <div class="col-md-3" th:each="item:${collectionList}">
+                        <div class="product-item">
+                            <div class="">
+                                <img class="img-responsive" th:src="${item.bPic}" alt="product-img"/>
+                            <div class="product-content">
+                                <h4><a th:href="'/toBookInfo/'+${item.bId}" th:text="${item.bName}"></a></h4>
+                                <p class="price" th:text="'￥'+${item.bPrice}">$200</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 地址: </label><input style="height: 25px" type="text" name="uAddress" th:value="${user.uAddress}">
-                    </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 邮箱: </label><input style="height: 25px" type="email" name="uEmail" th:value="${user.uEmail}">
-                    </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 手机号: </label><input style="height: 25px" type="tel" name="uPhone" th:value="${user.uPhone}">
-                    </div>
-                    <div class="form-control-sm"  style="padding: 6px;">
-                        <label class="table_info"> 简介: </label><input style="height: 25px" type="text" name="uEducation" th:value="${user.uEducation}">
-                    </div>
-                    <button class="btn btn_id" type="submit">提交</button>
                 </div>
-            </form>
-            <div class="pagin" id="smallpager"></div>
+            </div>
         </div>
     </div>
+
 </div>
 
 <script type="text/javascript">

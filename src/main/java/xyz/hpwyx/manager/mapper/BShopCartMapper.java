@@ -13,6 +13,7 @@ public interface BShopCartMapper {
     int insertSelective(BShopCart record);
     BShopCart selectByPrimaryKey(Integer cId);
     List<CartWithBook> findCartList(BShopCart record);
+    List<CartWithBook> findCartList2(BShopCart record);
     int updateByPrimaryKeySelective(BShopCart record);
     int updateByPrimaryKey(BShopCart record);
 }

@@ -31,6 +31,9 @@ public class CartServiceImpl implements CartService {
     public List<CartWithBook> findCartList(BShopCart cart){
         return dao.findCartList (cart);
     }
+    public List<CartWithBook> findCartList2(BShopCart cart){
+        return dao.findCartList2 (cart);
+    }
     public BShopCart getCart(BShopCart cart){
         return dao.selectByPrimaryKey (cart.getcId ());
     }

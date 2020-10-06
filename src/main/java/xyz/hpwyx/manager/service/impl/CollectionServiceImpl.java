@@ -6,6 +6,8 @@ import xyz.hpwyx.manager.mapper.BCollectionMapper;
 import xyz.hpwyx.manager.pojo.BCollection;
 import xyz.hpwyx.manager.service.CollectionService;
 
+import java.util.List;
+
 @Service
 public class CollectionServiceImpl implements CollectionService {
     @Autowired
@@ -14,5 +16,10 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public void addCollection(BCollection collection) {
         dao.insertSelective (collection);
+    }
+
+    @Override
+    public List<BCollection> getMyCollection(BCollection collection) {
+        return dao.findList (collection);
     }
 }

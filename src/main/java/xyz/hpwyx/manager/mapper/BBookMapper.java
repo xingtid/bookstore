@@ -15,7 +15,8 @@ public interface BBookMapper {
     BBook selectByPrimaryKey(Integer bId);
     List<BBook> findList(BBook record);
     List<BBook> findListRandom(BBook record);
+    List<BBook> findListBySale(BBook record);
     int updateByPrimaryKeySelective(BBook record);
-    int updateByPrimaryKey(BBook record);
+    int updateByBuyNum(BBook record);
     int countBookByType(BBook bBook);
 }

@@ -34,6 +34,7 @@ public class BBook {
     private Integer pageNum;
     private List<String> picList;
     private String typeName;
+    private Integer limit;
 
     public Integer getbId() {
         return bId;
@@ -172,5 +173,13 @@ public class BBook {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 }

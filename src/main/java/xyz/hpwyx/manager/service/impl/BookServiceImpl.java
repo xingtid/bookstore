@@ -22,11 +22,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BBook> findBookList() {
-        return dao.findListRandom (new BBook ());
+    public List<BBook> findBookList(BBook bBook) {
+        return dao.findListRandom (bBook);
     }
     public List<BBook> findList() {
         return dao.findList (new BBook ());
+    }
+    public List<BBook> findListBySale() {
+        return dao.findListBySale (new BBook ());
     }
 
     @Override
@@ -57,5 +60,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public int updateGood(BBook book) {
         return dao.updateByPrimaryKeySelective (book);
+    }
+
+    @Override
+    public int updateGoodBuyNum(BBook book) {
+        return dao.updateByBuyNum (book);
     }
 }

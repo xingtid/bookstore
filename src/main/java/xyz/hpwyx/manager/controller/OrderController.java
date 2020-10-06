@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.hpwyx.manager.common.AlipayConfig;
 import xyz.hpwyx.manager.common.TokenUtils;
 import xyz.hpwyx.manager.pojo.*;
+import xyz.hpwyx.manager.service.impl.BookServiceImpl;
 import xyz.hpwyx.manager.service.impl.CartServiceImpl;
 import xyz.hpwyx.manager.service.impl.OrderServiceImpl;
 
@@ -31,7 +32,8 @@ public class OrderController {
     private OrderServiceImpl orderService;
     @Autowired
     private CartServiceImpl cartService;
-
+    @Autowired
+    private BookServiceImpl bookService;
     @RequestMapping("/getMyOrder")
     public String getMyOrder(Model model, HttpSession session) {
         BUser userinfo = (BUser) session.getAttribute ("USERINFO");
@@ -44,6 +46,22 @@ public class OrderController {
         model.addAttribute ("orderList", orderList);
         return "/userOrder";
     }
+    @RequestMapping("/getOrderDetail/{oId}")
+    public String getOrderDetail(@PathVariable Integer oId, Model model, HttpSession session) {
+        BUser userinfo = (BUser) session.getAttribute ("USERINFO");
+        if (userinfo == null) {
+            return "/login";
+        }
+        BShopCart cart = new BShopCart ();
+        //查找该订单明细
+        cart.setcId (oId);
+        List<CartWithBook> cartList = cartService.findCartList2 (cart);
+        //查找该订单
+        BOrder orderById = orderService.getOrderById (oId);
+        model.addAttribute ("order",orderById);
+        model.addAttribute ("orderDetail",cartList);
+        return "/orderCommit";
+    }
 
     /**
      * 创建订单
@@ -51,27 +69,14 @@ public class OrderController {
     @RequestMapping("/createOrderDetail")
     public String createOrderDetail(BOrder order, Model model, HttpSession session) {
         BUser userinfo = (BUser) session.getAttribute ("USERINFO");
-//        List<Integer> id = order.getId ();
         if (userinfo == null) {
             return "/login";
         }
         BShopCart cart = new BShopCart ();
         cart.setcUserId (userinfo.getuId ());
         List<CartWithBook> cartList = cartService.findCartList (cart);
-        List<BOrderDetail> details = new ArrayList<> ();
-        //创建订单明细
         BigDecimal totalPrice = new BigDecimal (0);
         for (CartWithBook cartWithBook : cartList) {
-            BOrderDetail detail = new BOrderDetail ();
-            detail.setOdBookId (cartWithBook.getcBookId ());
-            detail.setOdCount (cartWithBook.getcCount ());
-            detail.setOdPrice (cartWithBook.getSingalPrice ());
-            detail.setOdMark (userinfo.getuId ().toString ());
-            details.add (detail);
-            orderService.insertOrderDetail(detail);
-            BShopCart cart1 = new BShopCart ();
-            cart1.setcId (cartWithBook.getId ());
-            cartService.delCart (cart1);
             //循环每件商品 计算总价
             BigDecimal multiply = new BigDecimal (cartWithBook.getcCount ()).multiply (cartWithBook.getSingalPrice ());
             totalPrice = totalPrice.add (multiply);
@@ -84,6 +89,27 @@ public class OrderController {
         order2.setoStartDate (new Date ());
         order2.setoStatus (1);
         orderService.insertOrder (order2);
+        List<BOrderDetail> details = new ArrayList<> ();
+        //创建订单明细
+        for (CartWithBook cartWithBook : cartList) {
+            BOrderDetail detail = new BOrderDetail ();
+            detail.setOdBookId (cartWithBook.getcBookId ());
+            detail.setOdCount (cartWithBook.getcCount ());
+            detail.setOdPrice (cartWithBook.getSingalPrice ());
+            detail.setOdMark (userinfo.getuId ().toString ());
+            detail.setOdOrderId (order2.getoId ());
+            details.add (detail);
+            orderService.insertOrderDetail(detail);
+            BShopCart cart1 = new BShopCart ();
+            cart1.setcId (cartWithBook.getId ());
+            cartService.delCart (cart1);
+            //增加该商品的购买数量
+            BBook bBook = new BBook ();
+            bBook.setbId (cartWithBook.getcBookId ());
+            bBook.setbBeSales (cartWithBook.getbBeSales ()+1);
+            bookService.updateGoodBuyNum (bBook);
+
+        }
         model.addAttribute ("order",order2);
         model.addAttribute ("orderDetail",cartList);
         return "/orderCommit";

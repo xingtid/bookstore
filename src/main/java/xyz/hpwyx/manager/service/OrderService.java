@@ -23,8 +23,7 @@ public interface OrderService {
      * @param id
      * @return
      */
-    @RequestMapping("/getPayById")
-    BOrder getPayById(@RequestParam("id") String id);
+    BOrder getOrderById(Integer id);
 
 
     int insertOrder(BOrder order);
@@ -38,7 +37,6 @@ public interface OrderService {
      * @Author:
      * @Date: 2019/8/1
      */
-    @RequestMapping("/creataeOrder")
     String createOrder(@RequestParam("orderNo") String orderNo, @RequestParam("amount") double amount, @RequestParam("body") String body) throws AlipayApiException;
 
     /**
@@ -50,11 +48,9 @@ public interface OrderService {
      * @Author:
      * @Date: 2019/8/1
      */
-    @RequestMapping("/notify")
     boolean notify(@RequestParam("tradeStatus") String tradeStatus, @RequestParam("orderNo") String orderNo, @RequestParam("tradeNo") String tradeNo);
 
 
-    @RequestMapping("/returnU")
     boolean returnU(@RequestParam("tradeStatus") String tradeStatus, @RequestParam("orderNo") String orderNo, @RequestParam("tradeNo") String tradeNo);
 
     /**
@@ -64,6 +60,5 @@ public interface OrderService {
      * @Author:
      * @Date: 2019/8/1
      */
-    @RequestMapping("/rsaCheckV1")
     boolean rsaCheckV1(HttpServletRequest request);
 }

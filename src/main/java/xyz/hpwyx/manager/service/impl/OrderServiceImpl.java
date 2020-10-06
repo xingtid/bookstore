@@ -42,8 +42,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public BOrder getPayById(String id) {
-        return null;
+    public BOrder getOrderById(Integer id) {
+        return dao.selectByPrimaryKey (id);
     }
 
     @Override

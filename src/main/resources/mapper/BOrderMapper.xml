@@ -26,7 +26,7 @@
         from b_order
         where o_id = #{oId,jdbcType=INTEGER}
     </select>
-    <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
         from b_order
@@ -49,7 +49,7 @@
                 #{oUserEvaluate,jdbcType=INTEGER}, #{oAmount,jdbcType=DECIMAL}, #{oPic,jdbcType=VARCHAR},
                 #{oMark,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BOrder">
+    <insert id="insertSelective" parameterType="xyz.hpwyx.manager.pojo.BOrder" useGeneratedKeys="true" keyProperty="oId">
         insert into b_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="oId != null">

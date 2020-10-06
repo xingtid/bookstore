@@ -23,10 +23,18 @@
     select
       c_id AS "id", c_count AS "cCount", c_book_id AS "cBookId" , c_price AS "cPrice",
            c_all AS "cAll", c_mark AS "bMark" ,c_all AS "cAll",
-    b.b_name AS "name",b.b_price AS "singalPrice" ,b.b_pic AS "img",b.b_introduce AS "goodTip"
+    b.b_name AS "name",b.b_price AS "singalPrice" ,b.b_pic AS "img",b.b_introduce AS "goodTip",b.b_be_sales AS "bBeSales"
     from b_shop_cart
     LEFT JOIN b_book b ON b.b_id = c_book_id
     where c_user_id = #{cUserId,jdbcType=INTEGER}
+  </select>
+  <select id="findCartList2" resultType="CartWithBook">
+    select
+      od_count AS "cCount",
+    b.b_name AS "name",b.b_price AS "singalPrice" ,b.b_pic AS "img",b.b_introduce AS "goodTip",b.b_be_sales AS "bBeSales"
+    from b_order_detail
+    LEFT JOIN b_book b ON b.b_id = od_book_id
+    where od_order_id = #{cId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from b_shop_cart

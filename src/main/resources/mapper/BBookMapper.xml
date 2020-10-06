@@ -45,7 +45,16 @@
         select
         <include refid="Base_Column_List"/>
         from b_book
-        order by rand() limit 9
+        <if test="bTypeId != null">
+           WHERE b_type_id = #{bTypeId}
+        </if>
+        order by rand() limit #{limit}
+    </select>
+    <select id="findListBySale" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from b_book
+        order by b_be_sales desc limit 12
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -192,20 +201,10 @@
         </set>
         where b_id = #{bId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="xyz.hpwyx.manager.pojo.BBook">
+    <update id="updateByBuyNum" parameterType="xyz.hpwyx.manager.pojo.BBook">
         update b_book
-        set b_price     = #{bPrice,jdbcType=DECIMAL},
-            b_discount  = #{bDiscount,jdbcType=INTEGER},
-            b_name      = #{bName,jdbcType=VARCHAR},
-            b_press     = #{bPress,jdbcType=VARCHAR},
-            b_type_id   = #{bTypeId,jdbcType=INTEGER},
-            b_anthor    = #{bAnthor,jdbcType=VARCHAR},
-            b_is_new    = #{bIsNew,jdbcType=INTEGER},
-            b_be_sales  = #{bBeSales,jdbcType=INTEGER},
-            b_is_sole   = #{bIsSole,jdbcType=INTEGER},
-            b_introduce = #{bIntroduce,jdbcType=VARCHAR},
-            b_pic       = #{bPic,jdbcType=VARCHAR},
-            b_mark      = #{bMark,jdbcType=VARCHAR}
+        set
+            b_be_sales  = #{bBeSales,jdbcType=INTEGER}
         where b_id = #{bId,jdbcType=INTEGER}
     </update>
     <select id="countBookByType" resultType="java.lang.Integer">

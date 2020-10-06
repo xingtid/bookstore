@@ -67,6 +67,22 @@ public class ShopController {
         List<String> picList = Arrays.asList (split);
         bBook.setPicList (picList);
         model.addAttribute ("book",bBook);
+        //推荐书籍
+        BBook bBook1 = new BBook ();
+        bBook1.setbTypeId (bBook.getbTypeId ());
+        bBook1.setLimit (4);
+        List<BBook> bookList = bookService.findBookList (bBook1);
+        model.addAttribute ("recomBook",bookList);
         return "bookInfo";
+    }
+
+    /**
+     * 排行 根据购买数量进行排行
+     */
+    @RequestMapping(value = "bookPaihang")
+    public String bookPaihang(Model model) {
+        List<BBook> listBySale = bookService.findListBySale ();
+        model.addAttribute ("book",listBySale);
+        return "paihang";
     }
 }

@@ -168,9 +168,9 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <a href="/toShopCart"
+                                        <a th:if="${order.oStatus} eq 1" href="/toShopCart"
                                            class="back" target="_top">返回购物车</a>
-                                        <a class=" btn-go" th:href="'/createOrder/'+${order.oAmount}">提交订单<b
+                                        <a th:if="${order.oStatus} eq 1" class=" btn-go" th:href="'/createOrder/'+${order.oAmount}+'/'+${order.oOrderNo}">提交订单<b
                                                 class="dpl-button"></b></a>
                                     </div>
                                 </div>

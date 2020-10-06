@@ -23,12 +23,6 @@
                     <li class="active" th:text="${book.bName}"></li>
                 </ol>
             </div>
-            <div class="col-md-6">
-                <ol class="product-pagination text-right">
-                    <li><a href="#"><i class="tf-ion-ios-arrow-left"></i> Next </a></li>
-                    <li><a href="#">Preview <i class="tf-ion-ios-arrow-right"></i></a></li>
-                </ol>
-            </div>
         </div>
         <div class="row mt-20">
             <div class="col-md-5">
@@ -85,7 +79,7 @@
                     <div class="product-quantity">
                         <span>数量:</span>
                         <div class="product-quantity-slider">
-                            <input id="product-quantity" type="text" value="1" name="product-quantity">
+                            <input id="product-quantity" type="number" value="1" name="product-quantity">
                         </div>
                     </div>
                     <input type="hidden" th:value="${book.bId}" id="bookId">
@@ -193,108 +187,28 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" th:each="item:${recomBook}">
                 <div class="product-item">
                     <div class="product-thumb">
                         <span class="bage">Sale</span>
-                        <img class="img-responsive" src="images/shop/products/product-5.jpg" alt="product-img" />
+                        <img class="img-responsive" th:src="${item.bPic}" alt="product-img" />
                         <div class="preview-meta">
                             <ul>
                                 <li>
-									<span  data-toggle="modal" data-target="#product-modal">
-										<i class="tf-ion-ios-search"></i>
-									</span>
+                                    <a th:href="'/toBookInfo/'+${item.bId}"><i class="tf-ion-ios-search-strong"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
+                                    <a href=""  ><i th:data-id="${item.bId}" onclick="addCollection(this)" class="tf-ion-ios-heart"></i></a>
                                 </li>
                                 <li>
-                                    <a href=""><i class="tf-ion-android-cart"></i></a>
+                                    <a href="#" ><i th:data-id="${item.bId}" onclick="addCart(this)" class="tf-ion-android-cart"></i></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="product-content">
-                        <h4><a href="product-single.html">Reef Boardsport</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="images/shop/products/product-1.jpg" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-									<span  data-toggle="modal" data-target="#product-modal">
-										<i class="tf-ion-ios-search-strong"></i>
-									</span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href=""><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Rainbow Shoes</a></h4>
-                        <p class="price">$200</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="images/shop/products/product-2.jpg" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-									<span  data-toggle="modal" data-target="#product-modal">
-										<i class="tf-ion-ios-search"></i>
-									</span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href=""><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Strayhorn SP</a></h4>
-                        <p class="price">$230</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="product-item">
-                    <div class="product-thumb">
-                        <img class="img-responsive" src="images/shop/products/product-3.jpg" alt="product-img" />
-                        <div class="preview-meta">
-                            <ul>
-                                <li>
-									<span  data-toggle="modal" data-target="#product-modal">
-										<i class="tf-ion-ios-search"></i>
-									</span>
-                                </li>
-                                <li>
-                                    <a href="#" ><i class="tf-ion-ios-heart"></i></a>
-                                </li>
-                                <li>
-                                    <a href=""><i class="tf-ion-android-cart"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product-content">
-                        <h4><a href="product-single.html">Bradley Mid</a></h4>
-                        <p class="price">$200</p>
+                        <h4><a th:href="'/toBookInfo/'+${item.bId}" th:text="${book.bName}"></a></h4>
+                        <p class="price" th:text="'￥'+${item.bPrice}">$200</p>
                     </div>
                 </div>
             </div>
@@ -321,6 +235,16 @@
                 }
             });
         }
+    }
+    function addCollection(da) {
+        let bookId = $(da).attr("data-id")
+        $.get("/addCollection/"+bookId, function (data) {
+            if (data.resultCode === 200) {
+                alert("添加成功")
+            } else {
+                alert(data.msg)
+            }
+        });
     }
 </script>
 </body>
