@@ -50,10 +50,10 @@
                                     <a th:href="'/toBookInfo/'+${item.bId}"><i class="tf-ion-ios-search-strong"></i></a>
                                 </li>
                                 <li>
-                                    <a href=""  ><i th:data-id="${item.bId}" onclick="addCollection(this)" class="tf-ion-ios-heart"></i></a>
+                                    <a href="javascript:void(0)"  ><i th:data-id="${item.bId}" onclick="addCollection(this)" class="tf-ion-ios-heart"></i></a>
                                 </li>
                                 <li>
-                                    <a href="#" ><i th:data-id="${item.bId}" onclick="addCart(this)" class="tf-ion-android-cart"></i></a>
+                                    <a href="javascript:void(0)" ><i th:data-id="${item.bId}" onclick="addCart(this)" class="tf-ion-android-cart"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -109,6 +109,7 @@
         $.get("/addBook/"+bookId+"/"+"1", function (data) {
             if (data.resultCode === 200) {
                 alert("添加成功")
+                location.reload()
             } else {
                 alert(data.msg)
             }

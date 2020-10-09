@@ -30,6 +30,11 @@
     from b_comment c
     LEFT JOIN  b_user user on user.u_id = c.user_id
     LEFT JOIN  b_book book on book.b_id = c.book_id
+    <where>
+      <if test="bookId != null">
+        c.book_id = #{bookId}
+      </if>
+    </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from b_comment

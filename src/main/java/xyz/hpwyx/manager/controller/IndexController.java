@@ -36,6 +36,10 @@ public class IndexController {
         List<BBookType> allType = bookTypeService.findAllType ();
         request.getSession ().setAttribute ("typeList", allType);
         findCart (model, request);
+        BBook bBook = new BBook ();
+        bBook.setLimit (9);
+        List<BBook> bookList = bookService.findBookList (bBook);
+        model.addAttribute ("bookList",bookList);
 //        try {
 //            String json3 = redisUtil.hget ("INDEX", "index_pic1");
 //            if (StringUtils.isNotBlank (json3)) {

@@ -12,7 +12,6 @@
         #page {
             width: auto;
         }
-
         #content {
             width: 950px;
             margin: auto;
@@ -35,7 +34,6 @@
 </div>
 <div id="page">
     <div id="content" class="grid-c">
-        <a href="#" onclick="history.back(-1)">返回</a>
         <div style="text-align: center">
             <h3 class="dib">确认订单信息</h3>
             <table class="order-table">
@@ -84,12 +82,12 @@
                     </td>
                     <td class="s-total">
                                <span class='price '>
-                             <em class="style-normal-bold-red" th:text="${item.cCount * item.singalPrice}">630.00</em>
+                                <em class="style-normal-bold-red" th:text="${item.cCount * item.singalPrice}">630.00</em>
                               </span>
                     </td>
                     <td class="s-agio" th:if="${order.oStatus} ne 1">
                               <span class=''>
-                             <em class="style-normal-small-black"> <a href="#" th:id="${item.id}" onclick="writea(this)">评价</a> </em>
+                                <em class="style-normal-small-black"> <a href="#" th:id="${item.id}" onclick="writea(this)">评价</a> </em>
                               </span>
                     </td>
                 </tr>
@@ -103,25 +101,25 @@
                             <li class="dib extra-info">
                                 <div class="shoppointarea"></div>
                                 <div class="farearea">
-                                    <ul class="dib-wrap ">
-                                        <li class="dib title">运送方式：</li>
-                                        <li class="dib sel">
-                                            <select>
-                                                <option data-fare="1500" value=" 2 " data-codServiceType="2"
-                                                        data-level="" selected="selected">
-                                                    快递 15.00元
-                                                </option>
-                                                <option data-fare="2500" value=" 7 " data-codServiceType="7"
-                                                        data-level="">
-                                                    EMS 25.00元
-                                                </option>
-                                                <option data-fare="1500" value=" 1 " data-codServiceType="1"
-                                                        data-level="">
-                                                    平邮 15.00元
-                                                </option>
-                                            </select>
-                                        </li>
-                                    </ul>
+<!--                                    <ul class="dib-wrap ">-->
+<!--                                        <li class="dib title">运送方式：</li>-->
+<!--                                        <li class="dib sel">-->
+<!--                                            <select>-->
+<!--                                                <option data-fare="1500" value=" 2 " data-codServiceType="2"-->
+<!--                                                        data-level="" selected="selected">-->
+<!--                                                    快递 15.00元-->
+<!--                                                </option>-->
+<!--                                                <option data-fare="2500" value=" 7 " data-codServiceType="7"-->
+<!--                                                        data-level="">-->
+<!--                                                    EMS 25.00元-->
+<!--                                                </option>-->
+<!--                                                <option data-fare="1500" value=" 1 " data-codServiceType="1"-->
+<!--                                                        data-level="">-->
+<!--                                                    平邮 15.00元-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
                                 </div>
                                 <div class="extra-area">
                                     <ul class="dib-wrap">
@@ -138,7 +136,7 @@
                 <tr class="shop-total blue-line">
                     <td colspan="5">店铺合计(<span class="J_Exclude" style="display: none">不</span>含运费)：
                         <span class='price g_price '>
-                             <span>&yen;</span><em class="style-middle-bold-red">630.00</em>
+                             <span>&yen;</span><em class="style-middle-bold-red" th:text="${order.oAmount}">630.00</em>
                               </span>
                     </td>
                 </tr>
@@ -153,14 +151,14 @@
                                         <div class="bd">
                                             <div class="point-in">
                                                 <em class="t">实付款：</em> <span class='price'>
- <span>&yen;</span><em class="style-large-bold-red">630.00</em>
+ <span>&yen;</span><em class="style-large-bold-red" th:text="${order.oAmount}">630.00</em>
   </span>
                                             </div>
                                             <ul>
                                                 <li><em>寄送至:</em><span
-                                                        style="word-break: break-all;">
+                                                        style="word-break: break-all;" th:text="${session.USERINFO.uAddress}">
    </span></li>
-                                                <li><em>收货人:</em><span>某某某 18124317260 </span></li>
+                                                <li><em>收货人:</em><span th:text="${session.USERINFO.uName}+' '+${session.USERINFO.uPhone}">某某某 18124317260 </span></li>
                                             </ul>
                                         </div>
                                     </div>

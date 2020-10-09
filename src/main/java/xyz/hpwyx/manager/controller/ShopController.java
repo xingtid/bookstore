@@ -7,7 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.hpwyx.manager.pojo.BBook;
+import xyz.hpwyx.manager.pojo.BComment;
 import xyz.hpwyx.manager.service.impl.BookServiceImpl;
+import xyz.hpwyx.manager.service.impl.CommentServiceImpl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +20,8 @@ public class ShopController {
 
     @Autowired
     private BookServiceImpl bookService;
+    @Autowired
+    private CommentServiceImpl commentService;
     @RequestMapping(value = "toShop/{bTypeId}/{pageNum}")
     public String toShop(BBook bBook, @PathVariable Integer bTypeId,@PathVariable(required = false) Integer pageNum, Model model) {
         bBook.setbTypeId (bTypeId);
@@ -73,6 +77,11 @@ public class ShopController {
         bBook1.setLimit (4);
         List<BBook> bookList = bookService.findBookList (bBook1);
         model.addAttribute ("recomBook",bookList);
+        //该书相关评论
+        BComment bComment = new BComment ();
+        bComment.setBookId (bookId);
+        List<BComment> list = commentService.findList (bComment);
+        model.addAttribute ("comment",list);
         return "bookInfo";
     }
 
