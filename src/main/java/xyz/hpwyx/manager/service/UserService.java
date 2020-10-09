@@ -12,4 +12,6 @@ public interface UserService {
     int countUser();
 
     int updateUser(BUser user);
+
+    BUser selectByPrimaryKey(Integer uId);
 }

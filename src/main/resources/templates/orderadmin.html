@@ -7,7 +7,6 @@
     <title>订单管理</title>
     <link rel="stylesheet" href="/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="/node_modules/jqvmap/dist/jqvmap.min.css"/>
     <link rel="stylesheet" href="/css/style2.css">
     <link rel="shortcut icon" href="/images/favicon.png"/>
 </head>
@@ -31,6 +30,7 @@
                                         <th>ID</th>
                                         <th>订单号</th>
                                         <th>订单时间</th>
+                                        <th>订单状态</th>
                                         <th>用户</th>
                                         <th>总价</th>
                                         <th>评论</th>
@@ -40,21 +40,25 @@
                                     <tbody>
                                     <!-- 循环 -->
                                     <tr th:each="a: ${orderList}">
-                                        <td th:text="${a.bId}">1</td>
-                                        <td th:text="${a.bName}">推荐</td>
-                                        <td th:text="${a.typeName}" class="text-danger"> 12461 <i
+                                        <td th:text="${a.oId}">1</td>
+                                        <td th:text="${a.oOrderNo}">推荐</td>
+                                        <td th:text="${#dates.format(a.oStartDate, 'yyyy-MM-dd')}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
-                                        <td th:text="${a.bPrice}" class="text-danger"> 12461 <i
+                                        <td th:text="${a.statusStr}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
-                                        <td th:text="${a.bBeSales}" class="text-danger"> 12461 <i
+                                        <td th:text="${a.userName}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
-                                        <td th:text="${a.bIntroduce}" class="text-danger"> 12461 <i
+                                        <td th:text="${a.oAmount}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
-                                        <button type="button" class="btn btn-gradient-danger btn-sm"
-                                                data-toggle="modal"
-                                                data-target="#deleteSource" th:id="${a.bId}"
-                                                onclick="deletea(this)">发货
-                                        </button>
+                                        <td th:text="${a.oUserComment}" class="text-danger"> 12461 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:if="${a.oStatus} eq 2">
+                                            <button type="button" class="btn btn-gradient-danger btn-sm"
+                                                    data-toggle="modal"
+                                                    data-target="#deleteSource" th:id="${a.oId}"
+                                                    onclick="deletea(this)">发货
+                                            </button>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -74,10 +78,10 @@
 
                             </div>
                             <div class="modal-body">
-                                <div class="container-fluid">确定已发货！</div>
+                                <div class="container-fluid">确定发货？</div>
                             </div>
-                            <form action="/delGood" method="post">
-                                <input type="hidden" id="dele" name="bId" value="">
+                            <form action="/sendOrder" method="post">
+                                <input type="hidden" id="dele" name="oId" value="">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-xs btn-white"
                                             data-dismiss="modal">取 消

@@ -31,6 +31,7 @@ public class BOrder {
 
     private String oMark;
     private List<Integer> id;
+    private String userName;
 
     public Integer getoId() {
         return oId;
@@ -51,6 +52,10 @@ public class BOrder {
                 return "已支付";
             case 3:
                 return "待发货";
+            case 4:
+                return "已发货";
+            case 5:
+                return "已完成";
             default:
                 return "";
         }
@@ -154,5 +159,13 @@ public class BOrder {
 
     public void setId(List<Integer> id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

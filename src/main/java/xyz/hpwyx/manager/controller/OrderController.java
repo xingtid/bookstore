@@ -46,6 +46,13 @@ public class OrderController {
         model.addAttribute ("orderList", orderList);
         return "/userOrder";
     }
+    @RequestMapping("/sendOrder")
+    public String sendOrder(BOrder order, Model model, HttpSession session) {
+        //已发货
+        order.setoStatus (4);
+        orderService.updateOrderStatus (order);
+        return "redirect:/adminOrder";
+    }
     @RequestMapping("/getOrderDetail/{oId}")
     public String getOrderDetail(@PathVariable Integer oId, Model model, HttpSession session) {
         BUser userinfo = (BUser) session.getAttribute ("USERINFO");

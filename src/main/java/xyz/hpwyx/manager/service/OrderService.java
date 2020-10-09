@@ -25,6 +25,7 @@ public interface OrderService {
      */
     BOrder getOrderById(Integer id);
 
+    int updateOrderStatus(BOrder order);
 
     int insertOrder(BOrder order);
 

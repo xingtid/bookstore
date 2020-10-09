@@ -220,7 +220,7 @@
             labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
             datasets: [
               {
-                label: "CHN",
+                label: "浏览",
                 borderColor: gradientStrokeViolet,
                 backgroundColor: gradientStrokeViolet,
                 hoverBackgroundColor: gradientStrokeViolet,
@@ -232,7 +232,7 @@
                 data: [20, 40, 15, 35, 25, 50, 30, 20]
               },
               {
-                label: "USA",
+                label: "用户",
                 borderColor: gradientStrokeRed,
                 backgroundColor: gradientStrokeRed,
                 hoverBackgroundColor: gradientStrokeRed,
@@ -244,7 +244,7 @@
                 data: [40, 30, 20, 10, 50, 15, 35, 40]
               },
               {
-                label: "UK",
+                label: "订单",
                 borderColor: gradientStrokeBlue,
                 backgroundColor: gradientStrokeBlue,
                 hoverBackgroundColor: gradientStrokeBlue,
@@ -357,9 +357,9 @@
     
         // These labels appear in the legend and in the tooltips when hovering different arcs
         labels: [
-          '美食',
-          '美妆',
-          '数码',
+          '文学',
+          '传记',
+          '儿童',
         ]
       };
       var trafficChartOptions = {

@@ -4,13 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import xyz.hpwyx.manager.pojo.BBook;
-import xyz.hpwyx.manager.pojo.BBookType;
-import xyz.hpwyx.manager.pojo.BUser;
-import xyz.hpwyx.manager.service.impl.BookServiceImpl;
-import xyz.hpwyx.manager.service.impl.BookTypeServiceImpl;
-import xyz.hpwyx.manager.service.impl.OrderServiceImpl;
-import xyz.hpwyx.manager.service.impl.UserServiceImpl;
+import xyz.hpwyx.manager.pojo.*;
+import xyz.hpwyx.manager.service.CommentService;
+import xyz.hpwyx.manager.service.impl.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -25,6 +21,8 @@ public class AdminController {
     private OrderServiceImpl orderService;
     @Autowired
     private UserServiceImpl userService;
+    @Autowired
+    private CommentServiceImpl commentService;
     @RequestMapping(value = "admin")
     public String admin(Model model, HttpServletRequest request) {
         int bookCount = bookService.countBookByType (new BBook ());
@@ -48,6 +46,16 @@ public class AdminController {
         model.addAttribute ("userList",list);
         return "useradmin";
     }
+    @RequestMapping(value = "adminOrder")
+    public String adminOrder(Model model, HttpServletRequest request) {
+        List<BOrder> list = orderService.getOrderList (new BOrder ());
+        for (BOrder item : list) {
+            BUser bUser = userService.selectByPrimaryKey (item.getoUserId ());
+            item.setUserName (bUser.getuName ());
+        }
+        model.addAttribute ("orderList",list);
+        return "orderadmin";
+    }
     @RequestMapping(value = "adminGood")
     public String adminGood(Model model, HttpServletRequest request) {
         List<BBook> bookList = bookService.findList ();
@@ -55,6 +63,12 @@ public class AdminController {
         List<BBookType> allType = bookTypeService.findAllType ();
         model.addAttribute ("typeList",allType);
         return "goodadmin";
+    }
+    @RequestMapping(value = "adminComment")
+    public String adminCollection(Model model, HttpServletRequest request) {
+        List<BComment> list = commentService.findList (new BComment ());
+        model.addAttribute ("commentList",list);
+        return "commentadmin";
     }
     @RequestMapping(value = "adminSearch")
     public String adminSearch(String name, Model model, HttpServletRequest request) {

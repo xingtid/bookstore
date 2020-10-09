@@ -13,175 +13,198 @@
             width: auto;
         }
 
-        #comm-header-inner, #content {
+        #content {
             width: 950px;
             margin: auto;
-        }
-
-        #header .wrap-box {
-            margin-top: -67px;
-        }
-
-        #logo .logo {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 140px;
-            height: 35px;
-            font-size: 35px;
-            line-height: 35px;
-            color: #f40;
-        }
-
-        #logo .logo .i {
-            position: absolute;
-            width: 140px;
-            height: 35px;
-            top: 0;
-            left: 0;
-            background: url(http://a.tbcdn.cn/tbsp/img/header/logo.png);
         }
     </style>
 
 </head>
 <body data-spm="1">
+<div id="reply" class="replya">
+    <span style="margin: 10px;display: block;font-size: 20px;">评价</span>
+    <span> <input type="text" id="comment"></span>
+    <p></p>
+    <div>
+    <span> <input type="radio" name="level" value="好">好<input type="radio" name="level" value="中">中<input type="radio" name="level" value="差">差</span>
+    </div>
+    <div style="margin-top: 10px;text-align:center">
+    <button type="button" id="isok" onclick="addComment(this)" data-id="">确定</button>
+    <button type="button" onclick=" closeWrite();">取消</button>
+    </div>
+</div>
 <div id="page">
     <div id="content" class="grid-c">
-        <form id="J_Form" name="J_Form" action="/auction/order/unity_order_confirm.htm" method="post">
-            <div>
-                <h3 class="dib">确认订单信息</h3>
-                <table class="order-table">
-                    <thead>
-                    <tr>
-                        <th class="s-title">店铺宝贝
-                            <hr/>
-                        </th>
-                        <th class="s-price">单价(元)
-                            <hr/>
-                        </th>
-                        <th class="s-amount">数量
-                            <hr/>
-                        </th>
-                        <th class="s-total">小计(元)
-                            <hr/>
-                        </th>
-                    </tr>
-                    </thead>
+        <a href="#" onclick="history.back(-1)">返回</a>
+        <div style="text-align: center">
+            <h3 class="dib">确认订单信息</h3>
+            <table class="order-table">
+                <thead>
+                <tr>
+                    <th class="s-title">店铺宝贝
+                        <hr/>
+                    </th>
+                    <th class="s-price">单价(元)
+                        <hr/>
+                    </th>
+                    <th class="s-amount">数量
+                        <hr/>
+                    </th>
+                    <th class="s-total">小计(元)
+                        <hr/>
+                    </th>
+                    <th th:if="${order.oStatus} ne 1" class="s-agio">操作
+                        <hr/>
+                    </th>
+                </tr>
+                </thead>
 
-                    <tbody th:each="item:${orderDetail}">
-                    <tr class="first">
-                        <td colspan="5"></td>
-                    </tr>
-                    <tr class="item">
-                        <td class="s-title">
-                            <a href="#" target="_blank">
-                                <img th:src="${item.img}" class="itempic">
-                                <span class="title" th:text="${item.name}"></span></a>
-                            <div class="props">
-                                <span th:text="${item.goodTip}"></span>
-                            </div>
-                        </td>
-                        <td class="s-price">
+                <tbody th:each="item:${orderDetail}">
+                <tr class="first">
+                    <td colspan="5"></td>
+                </tr>
+                <tr class="item">
+                    <td class="s-title">
+                        <a href="#" target="_blank">
+                            <img th:src="${item.img}" class="itempic">
+                            <span class="title" th:text="${item.name}"></span></a>
+                        <div class="props">
+                            <span th:text="${item.goodTip}"></span>
+                        </div>
+                    </td>
+                    <td class="s-price">
                               <span class='price '>
                              <em class="style-normal-small-black" th:text="'￥'+${item.singalPrice}">630.00</em>
                               </span>
-                        </td>
-                        <td class="s-amount">
+                    </td>
+                    <td class="s-amount">
                               <span class=''>
-                             <em class="style-normal-small-black" th:text="${item.cCount}" >10</em>
+                             <em class="style-normal-small-black" th:text="${item.cCount}">10</em>
                               </span>
-                        </td>
-                        <td class="s-total">
+                    </td>
+                    <td class="s-total">
                                <span class='price '>
                              <em class="style-normal-bold-red" th:text="${item.cCount * item.singalPrice}">630.00</em>
                               </span>
-                        </td>
-                    </tr>
+                    </td>
+                    <td class="s-agio" th:if="${order.oStatus} ne 1">
+                              <span class=''>
+                             <em class="style-normal-small-black"> <a href="#" th:id="${item.id}" onclick="writea(this)">评价</a> </em>
+                              </span>
+                    </td>
+                </tr>
 
-                    <tr class="blue-line" style="height: 2px;">
-                        <td colspan="5"></td>
-                    </tr>
-                    <tr class="other other-line">
-                        <td colspan="5">
-                            <ul class="dib-wrap">
-                                <li class="dib extra-info">
-                                    <div class="shoppointarea"></div>
-                                    <div class="farearea">
-                                        <ul class="dib-wrap ">
-                                            <li class="dib title">运送方式：</li>
-                                            <li class="dib sel">
-                                                <select>
-                                                    <option data-fare="1500" value=" 2 " data-codServiceType="2"
-                                                            data-level="" selected="selected">
-                                                        快递 15.00元
-                                                    </option>
-                                                    <option data-fare="2500" value=" 7 " data-codServiceType="7"
-                                                            data-level="">
-                                                        EMS 25.00元
-                                                    </option>
-                                                    <option data-fare="1500" value=" 1 " data-codServiceType="1"
-                                                            data-level="">
-                                                        平邮 15.00元
-                                                    </option>
-                                                </select>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="extra-area">
-                                        <ul class="dib-wrap">
-                                            <li class="dib title">发货时间：</li>
-                                            <li class="dib content">卖家承诺订单在买家付款后，72小时内<a href="#">发货</a></li>
-                                        </ul>
-                                    </div>
+                <tr class="blue-line" style="height: 2px;">
+                    <td colspan="5"></td>
+                </tr>
+                <tr class="other other-line" th:if="${order.oStatus} eq 1">
+                    <td colspan="5">
+                        <ul class="dib-wrap">
+                            <li class="dib extra-info">
+                                <div class="shoppointarea"></div>
+                                <div class="farearea">
+                                    <ul class="dib-wrap ">
+                                        <li class="dib title">运送方式：</li>
+                                        <li class="dib sel">
+                                            <select>
+                                                <option data-fare="1500" value=" 2 " data-codServiceType="2"
+                                                        data-level="" selected="selected">
+                                                    快递 15.00元
+                                                </option>
+                                                <option data-fare="2500" value=" 7 " data-codServiceType="7"
+                                                        data-level="">
+                                                    EMS 25.00元
+                                                </option>
+                                                <option data-fare="1500" value=" 1 " data-codServiceType="1"
+                                                        data-level="">
+                                                    平邮 15.00元
+                                                </option>
+                                            </select>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="extra-area">
+                                    <ul class="dib-wrap">
+                                        <li class="dib title">发货时间：</li>
+                                        <li class="dib content">卖家承诺订单在买家付款后，72小时内<a href="#">发货</a></li>
+                                    </ul>
+                                </div>
 
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
-                    <tr class="shop-total blue-line">
-                        <td colspan="5">店铺合计(<span class="J_Exclude" style="display: none">不</span>含运费)：
-                            <span class='price g_price '>
+                <tr class="shop-total blue-line">
+                    <td colspan="5">店铺合计(<span class="J_Exclude" style="display: none">不</span>含运费)：
+                        <span class='price g_price '>
                              <span>&yen;</span><em class="style-middle-bold-red">630.00</em>
                               </span>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="5">
-                            <div class="order-go" data-spm="4">
-                                <div class=" address-confirm">
-                                    <div class="kd-popup pop-back" style="margin-bottom: 40px;">
-                                        <div class="box">
-                                            <div class="bd">
-                                                <div class="point-in">
-                                                    <em class="t">实付款：</em> <span class='price'>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="5">
+                        <div class="order-go" data-spm="4">
+                            <div class=" address-confirm">
+                                <div class="kd-popup pop-back" style="margin-bottom: 40px;">
+                                    <div class="box">
+                                        <div class="bd">
+                                            <div class="point-in">
+                                                <em class="t">实付款：</em> <span class='price'>
  <span>&yen;</span><em class="style-large-bold-red">630.00</em>
   </span>
-                                                </div>
-                                                <ul>
-                                                    <li><em>寄送至:</em><span
-                                                            style="word-break: break-all;">
-   </span></li>
-                                                    <li><em>收货人:</em><span>某某某 18124317260 </span></li>
-                                                </ul>
                                             </div>
+                                            <ul>
+                                                <li><em>寄送至:</em><span
+                                                        style="word-break: break-all;">
+   </span></li>
+                                                <li><em>收货人:</em><span>某某某 18124317260 </span></li>
+                                            </ul>
                                         </div>
-                                        <a th:if="${order.oStatus} eq 1" href="/toShopCart"
-                                           class="back" target="_top">返回购物车</a>
-                                        <a th:if="${order.oStatus} eq 1" class=" btn-go" th:href="'/createOrder/'+${order.oAmount}+'/'+${order.oOrderNo}">提交订单<b
-                                                class="dpl-button"></b></a>
                                     </div>
+                                    <a th:if="${order.oStatus} eq 1" href="/toShopCart"
+                                       class="back" target="_top">返回购物车</a>
+                                    <a th:if="${order.oStatus} eq 1" class=" btn-go"
+                                       th:href="'/createOrder/'+${order.oAmount}+'/'+${order.oOrderNo}">提交订单<b
+                                            class="dpl-button"></b></a>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </form>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script>
+    function writea(data) {
+        var id = $(data).attr("data-id");
+        $("#isok").attr("data-id", id);
+        $("#reply").css("display", "block")
+
+    }
+    function closeWrite() {
+        $("#reply").css("display", "none");
+    }
+    function addComment(da) {
+        var data = {};
+        data.bookId = $(da).attr("data-id");
+        data.content = $("#comment").val();
+        data.level = $('input:radio:checked').val()
+        $.ajax({
+            url: "/addComment",
+            data: data,
+            type: "POST",
+            dataType: 'json',
+            success: function () {
+                location.reload()
+            }
+        });
+    }
+</script>
 </body>
 </html>

@@ -47,6 +47,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public int updateOrderStatus(BOrder order) {
+        return dao.updateByPrimaryKeySelective (order);
+    }
+
+    @Override
     public int insertOrder(BOrder order) {
         dao.insertSelective (order);
         return 1;

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.hpwyx.manager.mapper.BCommentMapper" >
+  <resultMap id="BaseResultMap" type="xyz.hpwyx.manager.pojo.BComment" >
+    <id column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="DATE" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="mark" property="mark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    c_id, content, level, time, user_id, book_id, mark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from b_comment
+    where c_id = #{cId,jdbcType=INTEGER}
+  </select>
+  <select id="findList" resultType="BComment" parameterType="java.lang.Integer" >
+    select
+        c.c_id AS "cId",
+           c.content,
+           c.level,
+           c.time,
+           user.u_name AS "userName",
+           book.b_name AS "bookName"
+    from b_comment c
+    LEFT JOIN  b_user user on user.u_id = c.user_id
+    LEFT JOIN  b_book book on book.b_id = c.book_id
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from b_comment
+    where c_id = #{cId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xyz.hpwyx.manager.pojo.BComment" >
+    insert into b_comment (c_id, content, level, 
+      time, user_id, book_id, 
+      mark)
+    values (#{cId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR},
+      #{time,jdbcType=DATE}, #{userId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, 
+      #{mark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.hpwyx.manager.pojo.BComment" >
+    update b_comment
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=DATE},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="bookId != null" >
+        book_id = #{bookId,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null" >
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+</mapper>
