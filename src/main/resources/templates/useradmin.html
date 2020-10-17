@@ -34,7 +34,8 @@
                                         <th>手机</th>
                                         <th>地址</th>
                                         <th>喜好</th>
-<!--                                        <th>操作</th>-->
+                                        <th>是否为管理员</th>
+                                        <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -50,6 +51,16 @@
                                                 class="mdi mdi-arrow-up"></i></td>
                                         <td th:text="${a.uHobby}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
+                                        <td th:if="${a.uIsAdmin} eq 1" class="text-danger"> 否 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:if="${a.uIsAdmin} eq 0" class="text-danger"> 是 <i
+                                                class="mdi mdi-arrow-up"></i></td>
+                                        <td th:if="${a.uIsAdmin} eq 1">
+                                            <a th:href="'/setAdmin/'+${a.uId}+'/0'">设为管理员</a>
+                                        </td>
+                                        <td th:if="${a.uIsAdmin} eq 0">
+                                            <a th:href="'/setAdmin/'+${a.uId}+'/1'">取消管理员</a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

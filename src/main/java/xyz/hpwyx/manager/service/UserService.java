@@ -14,4 +14,6 @@ public interface UserService {
     int updateUser(BUser user);
 
     BUser selectByPrimaryKey(Integer uId);
+
+    BUser getMyNum(BUser user);
 }

@@ -70,7 +70,7 @@ public class IndexController {
         model.addAttribute ("REFERER", url);
         return page;
     }
-    private void findCart(Model model, HttpServletRequest request) {
+    public void findCart(Model model, HttpServletRequest request) {
         BUser userinfo = (BUser) request.getSession ().getAttribute ("USERINFO");
         if (userinfo != null){
             BShopCart cart = new BShopCart ();

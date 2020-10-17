@@ -22,6 +22,18 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title" style="margin-right: 14%">订单管理
+                                    <div class="search-field d-none d-md-inline-block" style="width: 82%;">
+                                        <form class="d-flex align-items-center h-30 d-md-inline-block" action="/adminOrder" method="post">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend bg-transparent">
+                                                    <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                                                </div>
+                                                <input type="text" name="oOrderNo"
+                                                       class="form-control bg-transparent border-0 btn-sm " placeholder="订单号">
+                                                <input type="submit"  class="btn btn-gradient-light btn-sm d-md-inline-block" value="搜索">
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                                 <table class="table table-hover">
                                     <thead>

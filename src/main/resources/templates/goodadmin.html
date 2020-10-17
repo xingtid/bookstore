@@ -22,9 +22,21 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title" style="margin-right: 14%">书籍管理
-                                    <button style="float: right" class="btn btn-gradient-info" data-toggle="modal"
-                                            data-target="#addSource">添加
-                                    </button>
+                                    <div class="search-field d-none d-md-inline-block" style="width: 82%;">
+                                        <form class="d-flex align-items-center h-30 d-md-inline-block" action="/adminGood" method="post">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend bg-transparent">
+                                                    <i class="input-group-text border-0 mdi mdi-magnify"></i>
+                                                </div>
+                                                <input type="text" name="bName"
+                                                       class="form-control bg-transparent border-0 btn-sm " placeholder="搜索">
+                                                <input type="submit"  class="btn btn-gradient-light btn-sm d-md-inline-block" value="搜索">
+                                            </div>
+                                        </form>
+                                        <button style="float: right" class="btn btn-gradient-info d-md-inline-block" data-toggle="modal"
+                                                data-target="#addSource">添加
+                                        </button>
+                                    </div>
                                 </div>
                                 <div>
                                 </div>
@@ -61,10 +73,10 @@
                                         <td th:text="${a.bPic}" class="text-danger"> 12461 <i
                                                 class="mdi mdi-arrow-up"></i></td>
                                         <td>
-<!--                                            <button type="button" class="btn btn-gradient-primary btn-sm"-->
-<!--                                                    data-toggle="modal" data-target="#changeSource"-->
-<!--                                                    th:id="${a.bId}"onclick="updateType(this)">更改-->
-<!--                                            </button>-->
+                                            <!--                                            <button type="button" class="btn btn-gradient-primary btn-sm"-->
+                                            <!--                                                    data-toggle="modal" data-target="#changeSource"-->
+                                            <!--                                                    th:id="${a.bId}"onclick="updateType(this)">更改-->
+                                            <!--                                            </button>-->
                                             <button type="button" class="btn btn-gradient-danger btn-sm"
                                                     data-toggle="modal"
                                                     data-target="#deleteSource" th:id="${a.bId}"
@@ -185,21 +197,22 @@
                                             <label for="uu_name" class="col-xs-3 control-label">名称：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
-                                                       name="bName" >
+                                                       name="bName">
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label for="uu_name" class="col-xs-3 control-label">作者：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
-                                                       name="bAnthor" >
+                                                       name="bAnthor">
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label for="uu_name" class="col-xs-3 control-label">类别：</label>
                                             <div class="col-xs-8 ">
                                                 <select name="bTypeId">
-                                                    <option th:each="type:${typeList}" th:value="${type.tId}" th:text="${type.tName}" name="bTypeId"></option>
+                                                    <option th:each="type:${typeList}" th:value="${type.tId}"
+                                                            th:text="${type.tName}" name="bTypeId"></option>
                                                 </select>
                                             </div>
                                         </div>
@@ -207,21 +220,21 @@
                                             <label for="uu_name" class="col-xs-3 control-label">价格：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
-                                                      name="bPrice" >
+                                                       name="bPrice">
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label for="uu_name" class="col-xs-3 control-label">图片：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
-                                                        name="bPic" >
+                                                       name="bPic">
                                             </div>
                                         </div>
                                         <div class="form-group ">
                                             <label for="uu_name" class="col-xs-3 control-label">简介：</label>
                                             <div class="col-xs-8 ">
                                                 <input type="text" class="form-control input-sm duiqi"
-                                                        name="bIntroduce" >
+                                                       name="bIntroduce">
                                             </div>
                                         </div>
                                         <div class="modal-footer">

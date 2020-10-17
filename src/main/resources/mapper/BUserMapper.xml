@@ -208,4 +208,10 @@
       </if>
     </where>
   </select>
+  <select id="getMyNum" resultType="BUser">
+    SELECT
+        (SELECT count(1) AS "orderNum" FROM b_order where o_user_id = #{uId}) AS "orderNum",
+        (SELECT count(1) AS "collectionNum" FROM b_collection where c_user_id = #{uId}) AS "collectionNum",
+        (SELECT count(1) AS "carNum" FROM b_shop_cart where c_user_id = #{uId}) AS "carNum"
+  </select>
 </mapper>

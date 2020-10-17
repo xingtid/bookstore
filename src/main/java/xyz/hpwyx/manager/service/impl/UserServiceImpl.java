@@ -34,12 +34,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateUser(BUser user) {
-        return dao.updateByPrimaryKey (user);
+        return dao.updateByPrimaryKeySelective (user);
     }
 
     @Override
     public BUser selectByPrimaryKey(Integer uId) {
         return dao.selectByPrimaryKey (uId);
+    }
+
+    @Override
+    public BUser getMyNum(BUser user) {
+        return dao.getMyNum (user);
     }
 
     public List<BUser> findList(BUser user){

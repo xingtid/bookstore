@@ -26,6 +26,9 @@ public class BUser {
     private String uDetail;
 
     private String uMark;
+    private Integer carNum;
+    private Integer collectionNum;
+    private Integer orderNum;
 
     public Integer getuId() {
         return uId;
@@ -129,5 +132,29 @@ public class BUser {
 
     public void setuMark(String uMark) {
         this.uMark = uMark == null ? null : uMark.trim();
+    }
+
+    public Integer getCarNum() {
+        return carNum;
+    }
+
+    public void setCarNum(Integer carNum) {
+        this.carNum = carNum;
+    }
+
+    public Integer getCollectionNum() {
+        return collectionNum;
+    }
+
+    public void setCollectionNum(Integer collectionNum) {
+        this.collectionNum = collectionNum;
+    }
+
+    public Integer getOrderNum() {
+        return orderNum;
+    }
+
+    public void setOrderNum(Integer orderNum) {
+        this.orderNum = orderNum;
     }
 }

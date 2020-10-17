@@ -209,6 +209,9 @@
             <if test="oUserId != null">
                 o_user_id = #{oUserId,jdbcType=INTEGER}
             </if>
+            <if test="oOrderNo != null">
+                instr(o_order_no,#{oOrderNo}) > 0
+            </if>
         </where>
         ORDER BY o_start_date
     </select>

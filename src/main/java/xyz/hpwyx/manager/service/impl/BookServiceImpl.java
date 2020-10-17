@@ -25,8 +25,8 @@ public class BookServiceImpl implements BookService {
     public List<BBook> findBookList(BBook bBook) {
         return dao.findListRandom (bBook);
     }
-    public List<BBook> findList() {
-        return dao.findList (new BBook ());
+    public List<BBook> findList(BBook bBook) {
+        return dao.findList (bBook);
     }
     public List<BBook> findListBySale() {
         return dao.findListBySale (new BBook ());

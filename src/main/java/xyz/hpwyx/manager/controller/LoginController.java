@@ -32,6 +32,10 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken (person.getuUsername (), person.getuPassword ());
         try {
             subject.login (token);
+            BUser myNum = userService.getMyNum (xUser);
+            xUser.setCarNum (myNum.getCarNum ());
+            xUser.setCollectionNum (myNum.getCollectionNum ());
+            xUser.setOrderNum (myNum.getOrderNum ());
             request.getSession ().setAttribute ("USERINFO", xUser);
             return Result.success ();
         } catch (UnknownAccountException | IncorrectCredentialsException e) {

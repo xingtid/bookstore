@@ -3,6 +3,7 @@ package xyz.hpwyx.manager.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.hpwyx.manager.pojo.*;
 import xyz.hpwyx.manager.service.CommentService;
@@ -47,8 +48,8 @@ public class AdminController {
         return "useradmin";
     }
     @RequestMapping(value = "adminOrder")
-    public String adminOrder(Model model, HttpServletRequest request) {
-        List<BOrder> list = orderService.getOrderList (new BOrder ());
+    public String adminOrder(BOrder order, Model model, HttpServletRequest request) {
+        List<BOrder> list = orderService.getOrderList (order);
         for (BOrder item : list) {
             BUser bUser = userService.selectByPrimaryKey (item.getoUserId ());
             item.setUserName (bUser.getuName ());
@@ -57,8 +58,8 @@ public class AdminController {
         return "orderadmin";
     }
     @RequestMapping(value = "adminGood")
-    public String adminGood(Model model, HttpServletRequest request) {
-        List<BBook> bookList = bookService.findList ();
+    public String adminGood(BBook bBook, Model model, HttpServletRequest request) {
+        List<BBook> bookList = bookService.findList (bBook);
         model.addAttribute ("goodList",bookList);
         List<BBookType> allType = bookTypeService.findAllType ();
         model.addAttribute ("typeList",allType);
@@ -75,4 +76,14 @@ public class AdminController {
 
         return "typeadmin";
     }
+    @RequestMapping(value = "setAdmin/{id}/{isAdmin}")
+    public String adminSearch(@PathVariable Integer id,@PathVariable Integer isAdmin, Model model, HttpServletRequest request) {
+        BUser user = new BUser ();
+        user.setuId (id);
+        user.setuIsAdmin (isAdmin.toString ());
+        userService.updateUser(user);
+        return "redirect:/adminUser";
+    }
+
+
 }

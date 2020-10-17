@@ -22,6 +22,8 @@ public class CartController {
     private CartServiceImpl cartService;
     @Autowired
     private BookService bookService;
+    @Autowired
+    private IndexController controller;
     @ResponseBody
     @RequestMapping(value = "addBook/{bookId}/{count}")
     public Result addBook(@PathVariable Integer bookId,@PathVariable Integer count, Model model, HttpServletRequest request) {
@@ -38,6 +40,7 @@ public class CartController {
         cart.setcPrice (bBook.getbPrice ());
         cart.setcAll (bBook.getbPrice ().multiply (new BigDecimal (count)));
         cartService.insertCart (cart);
+        controller.findCart (model, request);
         return Result.success ();
     }
     @RequestMapping(value = "toShopCart")
